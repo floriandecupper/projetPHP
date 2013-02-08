@@ -1,4 +1,5 @@
 <?php
+require('lib/myLib/user.php');
 $f3=require('lib/base.php');
 
 $f3->config('config/globals.ini');

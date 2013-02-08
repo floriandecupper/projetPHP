@@ -2,46 +2,45 @@
 class Signup_controller{
  
  function __construct(){
-  
+    F3::set('page_title','Inscription');
  }
  
  function home(){
-    $id=F3::get('PARAMS.id');
-    #récupération de la location
-    $App=new App();
-    // $location=$App->locationDetails($id);
-    
-    // F3::set('position',Views::instance()->toJson($location,array('lat'=>'lat','lng'=>'lng')));
-    
-    
-    #récupération des images de la location
-    // $pictures=$App->locationPictures($location->id);
-    // $json=Views::instance()->toJson($pictures,array('image'=>'src'));
-    // F3::set('pictures',$json);
-    
-    // $next=$App->next($location->id);
-    // $prev=$App->prev($location->id);
-    
-
-    // $p=$prev?$prev[0]['id'].'-'.$prev[0]['title']:'';
-    // $n=$next?$next[0]['id'].'-'.$next[0]['title']:'';
-
-    // F3::set('prev',$p);
-    // F3::set('next',$n);
-    
     echo Views::instance()->render('signup/home.html');
  }
  
   
-  function submit(){
+  function submit()
+  {
     $erreur='';
-    if(F3::get('POST.password1')!=F3::get('POST.password2')) 
+    $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';  
+    F3::set('form_mail',F3::get('POST.mail'));
+    F3::set('form_prenom',F3::get('POST.prenom'));
+    F3::set('form_nom',F3::get('POST.nom'));
+    F3::set('form_description',F3::get('POST.description'));
+    if(!preg_match($regex,F3::get('POST.mail'))) // Vérifie si l'email n'est pas valide
+    {
+        F3::set('erreur',"Erreur : L'adresse E-Mail n'est pas valide.");
+        echo Views::instance()->render('signup/home.html');
+    }elseif(strlen(F3::get('POST.prenom'))<2) 
+    {
+        F3::set('erreur',"Erreur : Votre prénom doit contenir au moins 2 caractères.");
+        echo Views::instance()->render('signup/home.html');
+    }elseif(strlen(F3::get('POST.nom'))<2) 
+    {
+        F3::set('erreur',"Erreur : Votre nom doit contenir au moins 2 caractères.");
+        echo Views::instance()->render('signup/home.html');
+    }elseif(F3::get('POST.password1')!=F3::get('POST.password2')) 
     {
         F3::set('erreur',"Erreur : Les deux mots de passe ne correspondent pas.");
         echo Views::instance()->render('signup/home.html');
-    }else 
+    }else
     {
-        F3::set('pseudo',F3::get('POST.pseudo'));
+        $App=new App();
+        $user0=$App->addUser(F3::get('POST.mail'), F3::get('POST.password1'), F3::get('POST.prenom'), F3::get('POST.nom'), F3::get('POST.description'));
+        $user=new User($user0->nom,$user0->prenom,$user0->points,$user0->mail);
+        F3::set('SESSION.user',$user);
+        F3::set('user',$user);
         echo Views::instance()->render('signup/submit.html');
     }
   }

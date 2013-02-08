@@ -1,17 +1,18 @@
 <?php
-class App_controller{
+class Member_controller{
  
  function __construct(){
-    
-    F3::set('page_title','Accueil');
+    if(F3::get('SESSION.user')==NULL) {
+        F3::reroute('/connexion'); 
+    }
+    F3::set('page_title','Espace Membre');
  }
  
  function home(){
-    $id=F3::get('PARAMS.id');
+    // $id=F3::get('PARAMS.id');
     #récupération de la location
-    $App=new App();
+    // $App=new App();
     // $location=$App->locationDetails($id);
-    F3::set('location','$location');
     
     // F3::set('position',Views::instance()->toJson($location,array('lat'=>'lat','lng'=>'lng')));
     
@@ -30,14 +31,10 @@ class App_controller{
 
     // F3::set('prev',$p);
     // F3::set('next',$n);
-    
-    echo Views::instance()->render('accueil.html');
+    F3::set('user', F3::get('SESSION.user'));
+    echo Views::instance()->render('member/home.html');
  }
  
-  
-  function doc(){
-    echo Views::instance()->render('userref.html');
-  }
  
  function __destruct(){
 

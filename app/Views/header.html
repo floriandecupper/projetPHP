@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Projet PHP : <?php echo $page_title; ?></title>
+		<meta name="description" content="">
+	 	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="screen"  />	
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1><?php echo $page_title; ?></h1>
+			<p class="error"><?php if(isset($erreur)) echo $erreur; ?></p>
