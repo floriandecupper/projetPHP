@@ -1,0 +1,5 @@
+<?php require 'app/Views/header.html'; ?><br />
+ 	<p><?php echo $annonce->description; ?></p><br />
+ 	<p><?php echo $annonce->prix; ?> Euros</p><br />
+ 	<p>Postée le <?php echo date('d/m/Y', $annonce->date).' à '.date('H:i:s', $annonce->date); ?> par <a href="../membre/<?php echo $user->id(); ?>"><?php echo $user->pseudo(); ?></a><br /><br /></p><p class="signaler" class="lien">Signaler cette annonce</p>
+<?php require 'app/Views/footer.html'; ?>

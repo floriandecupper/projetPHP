@@ -9,32 +9,20 @@ class Member_controller{
  }
  
  function home(){
-    // $id=F3::get('PARAMS.id');
-    #récupération de la location
-    // $App=new App();
-    // $location=$App->locationDetails($id);
-    
-    // F3::set('position',Views::instance()->toJson($location,array('lat'=>'lat','lng'=>'lng')));
-    
-    
-    #récupération des images de la location
-    // $pictures=$App->locationPictures($location->id);
-    // $json=Views::instance()->toJson($pictures,array('image'=>'src'));
-    // F3::set('pictures',$json);
-    
-    // $next=$App->next($location->id);
-    // $prev=$App->prev($location->id);
-    
 
-    // $p=$prev?$prev[0]['id'].'-'.$prev[0]['title']:'';
-    // $n=$next?$next[0]['id'].'-'.$next[0]['title']:'';
-
-    // F3::set('prev',$p);
-    // F3::set('next',$n);
     F3::set('user', F3::get('SESSION.user'));
     echo Views::instance()->render('member/home.html');
  }
- 
+ function show() {
+
+ 	$App=new App();
+    $user0=$App->show(F3::get('PARAMS.idmembre'), 'pu_membre');
+    $user=new User($user0->id,$user0->nom,$user0->prenom,$user0->points,$user0->mail, $user0->description, $user0->tags, $user0->date, $user0->ip, $user0->id_parrain);
+    F3::set('page_title',$user->prenom());
+    F3::set('user',$user);
+    echo Views::instance()->render('header.html');
+    echo Views::instance()->render('member/show.html');
+ }
  
  function __destruct(){
 

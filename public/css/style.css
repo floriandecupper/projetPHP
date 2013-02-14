@@ -63,3 +63,17 @@ body {
 .error {
 	color:#bf0000;
 }
+.signaler {
+  text-decoration:underline;
+  cursor:pointer;
+}
+.signaler_popup {
+    background-color: #F8F4F8;
+    border: 1px solid #7D6212;
+    display: none;
+    height: 250px;
+    opacity: 0;
+    position: fixed;
+    top: 20%;
+    width: 500px;
+}

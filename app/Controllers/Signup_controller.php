@@ -38,7 +38,10 @@ class Signup_controller{
     {
         $App=new App();
         $user0=$App->addUser(F3::get('POST.mail'), F3::get('POST.password1'), F3::get('POST.prenom'), F3::get('POST.nom'), F3::get('POST.description'));
-        $user=new User($user0->nom,$user0->prenom,$user0->points,$user0->mail);
+        $user=new User($user0->id,$user0->nom,$user0->prenom,$user0->points,$user0->mail, $user0->description);
+        $contenu = "<p>Bonjour ".$user0->prenom.",<br /><br />Vous venez de vous inscrire sur ".F3::get('site_nom').". Afin de valider votre inscription, vous devez cliquer sur le lien suivant :<br /><a href='".F3::get('site_url')."verification/".$user0->id."/".$user0->activation."'>".F3::get('site_url')."verification/".$user0->id."/".$user0->activation."</a><br /><br />Cordialement,<br />L'équipe de ".F3::get('site_nom');
+        $mail=new Mail($user0->mail, F3::get('site_mail'), '', 'Inscription sur '.F3::get('site_nom'), $contenu);
+        $mail->send();
         F3::set('SESSION.user',$user);
         F3::set('user',$user);
         echo Views::instance()->render('signup/submit.html');

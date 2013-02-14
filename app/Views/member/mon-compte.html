@@ -1,0 +1,8 @@
+<?php require 'app/Views/header.html'; ?>
+	Modifier mes informations<br /><hr />
+	<input type="text" name="mail" value="<?php echo $user->mail(); ?>" /><br /><br />
+	<input type="text" name="password1" placeholder="Password 1" /><br /><br />
+	<input type="text" name="password2" placeholder="Password 2" /><br /><br />
+	<textarea name="services" placeholder="Vos services"><?php echo $user->description(); ?></textarea><br /><br />
+	<input type="submit" value="Modifier" />
+<?php require 'app/Views/footer.html'; ?>
