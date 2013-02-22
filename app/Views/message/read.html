@@ -1,0 +1,16 @@
+<?php require 'app/Views/header.html';
+
+	echo "<h3>".transformToPseudo($user0->prenom,$user->nom)." : ".$message->titre."</h3><br />";
+	echo "<p>".$message->message."</p>";
+	echo "<p><i>Le ".transformToDate($message->date)."</i><br /><br /></p>";
+	?><br /><br />
+	<h3>Répondre à ce message :</h3>
+	<form action="nouveau" method="POST">
+		<input type="hidden" name="titre" value="<?php echo 'Re: '.$message->titre; ?>" />
+		<input type="hidden" name="id_membre2" value="<?php echo $message->id_membre1; ?>" />
+		<textarea name="message" placeholder="Votre réponse ici" required></textarea><br />
+		<input type="submit" value="Envoyer" />
+	</form>
+	<?php
+require 'app/Views/footer.html'; 
+?>

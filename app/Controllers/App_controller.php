@@ -2,15 +2,20 @@
 class App_controller{
  
  function __construct(){
-    if(F3::get('SESSION.user')!=NULL) {
-       F3::set('user', F3::get('SESSION.user'));
+    if(F3::get('SESSION.user_id')!=NULL) {
+      $App=new App();
+      $user=$App->getUser(F3::get('SESSION.user_id'));
+          $msgNonLus=$App->gets('pu_message','id_membre2=? AND lu=?', array($user->id,0));
+    F3::set('msgNonLus',count($msgNonLus));
+      F3::set('user', $user);
     }
     F3::set('page_title','Accueil');
  }
  
  function home(){
     $App=new App();
-    F3::set('annonces',$App->getAnnounces());
+    // F3::set('annonces',$App->gets('pu_annonce'));
+    F3::set('annonces',$App->gets('pu_annonce','etat=?',array('0'),array('order'=>'date DESC','limit'=>'0,100')));
     echo Views::instance()->render('accueil.html');
  }
  

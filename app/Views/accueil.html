@@ -1,9 +1,9 @@
 <?php require 'app/Views/header.html'; ?>
 <?php if(!isset($user)) { ?><a href="connexion">Connexion</a> - <a href="inscription">Inscription</a><?php }else{ ?> <?php require 'app/Views/menu.html'; ?><br /><br /> <?php
 }
-// print_r ($annonces);
-for($i=0;$i<count($annonces);$i++) {
-	echo "<a href='annonce/".$annonces[$i]->id."'>".$annonces[$i]->titre."</a><br />";
+
+foreach ($annonces as $i=>$annonce) {
+	echo "<a href='annonce/".$annonce->id."'>".$annonce->titre."</a><br />";
 }
 require 'app/Views/footer.html'; 
 ?>

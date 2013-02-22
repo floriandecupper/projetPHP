@@ -7,7 +7,7 @@ class Connexion_controller{
  }
  
  function home(){
-    if(F3::get('SESSION.user')!=NULL) { 
+    if(F3::get('SESSION.user_id')!=NULL) { 
         F3::reroute('/membre'); 
     }
     echo Views::instance()->render('connexion/home.html');
@@ -17,20 +17,35 @@ class Connexion_controller{
   function submit(){
     $erreur='';
     $App=new App();
-    $user0=$App->connexion(F3::get('POST.mail'), md5(F3::get('POST.password')));
-    if(!$user0) 
+    $result=$App->connexion(F3::get('POST.mail'), md5(F3::get('POST.password')));
+    if(is_integer($result)) 
     {
-        F3::set('erreur',"Erreur d'identification : Impossible de vous connecter.");
-        echo Views::instance()->render('connexion/home.html');
-    }else 
+        if($result==0){
+            F3::set('erreur',"Erreur : Les identifiants sont incorrects.");
+            echo Views::instance()->render('connexion/home.html');
+        }elseif($result==1) 
+        {
+            F3::set('erreur',"Erreur : Vous avez dépassé le nombre de tentatives, merci de réessayer plus tard.");
+            echo Views::instance()->render('connexion/home.html');
+        }
+    }else
     {
-        $user=new User($user0->id,$user0->nom,$user0->prenom,$user0->points,$user0->mail, $user0->description, $user0->tags, $user0->date, $user0->ip, $user0->id_parrain);
-        F3::set('SESSION.user',$user);
-        F3::set('user',$user);
+        $user0=$result;
+        F3::set('SESSION.user_id',$user0->id);
+        F3::set('SESSION.user_mail',$user0->mail);
+        F3::set('user',$user0);
         F3::reroute('/membre');
     }
   }
-
+ function oubli(){
+    echo Views::instance()->render('connexion/oubli.html');
+ }
+   function oubli_submit(){
+    $erreur='';
+    $App=new App();
+    $user0=$App->oubli(F3::get('POST.mail'));
+    echo Views::instance()->render('connexion/oubli2.html');
+  }
     function verification(){
         $App=new App();
         $test=$App->verification(F3::get('PARAMS.idmembre'), F3::get('PARAMS.activation'));
@@ -43,7 +58,10 @@ class Connexion_controller{
         }
         
   }
- 
+ function deconnexion(){
+    F3::clear( 'SESSION' );
+    F3::reroute('/'); 
+ }
  function __destruct(){
 
  } 

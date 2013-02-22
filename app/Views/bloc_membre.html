@@ -1,7 +1,7 @@
 <?php 
 if(isset($user)) {
 	?>
-		<div class="bloc_membre"><p><?php echo $user->pseudo(); ?> - <?php echo $user->points(); ?> Switz - 0 notifications - 0 messages</p></div>
+		<div class="bloc_membre"><p><?php echo transformToPseudo($user->prenom, $user->nom); ?> - <?php echo $user->points; ?> Switz - 0 notifications - <?php echo $msgNonLus; ?> messages</p></div>
 	<?php
 }
 ?>

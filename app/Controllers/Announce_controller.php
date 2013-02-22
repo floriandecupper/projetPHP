@@ -2,10 +2,17 @@
 class Announce_controller{
  
  function __construct(){
-    if(F3::get('SESSION.user')==NULL) {
+    if(F3::get('SESSION.user_id')==NULL) {
         F3::reroute('/connexion'); 
     }
     F3::set('page_title','Accueil');
+        if(F3::get('SESSION.user_id')!=NULL) {
+      $App=new App();
+      $user=$App->getUser(F3::get('SESSION.user_id'));
+          $msgNonLus=$App->gets('pu_message','id_membre2=? AND lu=?', array($user->id,0));
+    F3::set('msgNonLus',count($msgNonLus));
+      F3::set('user', $user);
+    }
  }
  
  function home(){
@@ -38,7 +45,8 @@ class Announce_controller{
  }
   function add(){
     F3::set('page_title','Créer une annonce');
-    F3::set('user', F3::get('SESSION.user'));
+    $App=new App();
+    $user=$App->getUser(F3::get('SESSION.user_id'));
     echo Views::instance()->render('annonces/new.html');
  }
 function submit() {
@@ -59,9 +67,9 @@ function submit() {
         F3::set('erreur',"Erreur : Le prix n'est pas correcte.");
         echo Views::instance()->render('annonces/new.html');
     }else{
-        
-        $user=F3::get('SESSION.user');
-        $annonce=$App->addAnnounce(F3::get('POST.titre'), F3::get('POST.description'), F3::get('POST.prix'), $user->id());
+        $App=new App();
+        $user=$App->getUser(F3::get('SESSION.user_id'));
+        $annonce=$App->addAnnounce(F3::get('POST.titre'), F3::get('POST.description'), F3::get('POST.prix'), $user->id);
         F3::reroute('/annonce/'.$annonce->id);
     }
 }
@@ -74,8 +82,7 @@ function show() {
     $annonce=$App->show(F3::get('PARAMS.idannonce'), 'pu_annonce');
     F3::set('page_title',$annonce->titre);
     F3::set('annonce',$annonce);
-    $user0=$App->getUser($annonce->id_membre);
-    $user=new User($user0->id,$user0->nom,$user0->prenom,$user0->points,$user0->mail, $user0->description);
+    $user=$App->getUser($annonce->id_membre);
     F3::set('user',$user);
     echo Views::instance()->render('annonces/show.html');
 }  

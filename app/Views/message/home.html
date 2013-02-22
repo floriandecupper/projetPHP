@@ -1,0 +1,11 @@
+<?php require 'app/Views/header.html';
+
+foreach ($messages as $i=>$message) {
+	echo "<a href='message/".$message->id."'>";
+	if($message->lu==0) { echo "<b>"; }
+	echo $pseudos[$i]." : ".$message->titre;
+	if($message->lu==0) { echo "</b>"; }
+	echo "</a><br />";
+}
+require 'app/Views/footer.html'; 
+?>

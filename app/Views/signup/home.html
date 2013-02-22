@@ -3,7 +3,7 @@
  		<input type="mail" placeholder="Adresse E-mail" name="mail" <?php if(isset($form_mail)) { echo "value='$form_mail'"; } ?> required /><br /><br />
 		<input type="text" placeholder="Prénom" name="prenom" <?php if(isset($form_mail)) { echo "value='$form_prenom'"; } ?> required /><br /><br />
 		<input type="text" placeholder="Nom" name="nom" <?php if(isset($form_nom)) { echo "value='$form_nom'"; } ?> required /><br /><br />
-		<textarea placeholder="Vos services" name="description" ><?php if(isset($form_description)) { echo $form_description } ?></textarea><br /><br />
+		<textarea placeholder="Vos services" name="description" ><?php if(isset($form_description)) { echo $form_description; } ?></textarea><br /><br />
 		<input type="password" placeholder="Password 1" name="password1" required /><br /><br />
 		<input type="password" placeholder="Password 2" name="password2" required /><br /><br />
 		<input type="submit" value="Je m'inscris !" />

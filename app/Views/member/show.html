@@ -1,6 +1,6 @@
 <?php require 'app/Views/header.html'; ?><br />
- 	<p>Description : <?php echo $user->description(); ?></p><br />
- 	<p>Points : <?php echo $user->points(); ?></p><br />
- 	<p>Tags : <?php echo $user->tags(); ?></p><br />
- 	<p>Utilisateur inscrit le <?php echo $user->date(); ?></p>
+ 	<p>Description : <?php echo $user0->description; ?></p><br />
+ 	<p>Points : <?php echo $user0->points; ?></p><br />
+ 	<p>Tags : <?php echo $user0->tags; ?></p><br />
+ 	<p>Utilisateur inscrit le <?php echo transformToDate($user0->date); ?></p>
 <?php require 'app/Views/footer.html'; ?>
