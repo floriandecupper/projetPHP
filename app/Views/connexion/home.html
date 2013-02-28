@@ -1,5 +1,5 @@
 <?php require 'app/Views/header.html'; ?>
- 	<form method="post" action="connexion"><br />Pour vous connecter, merci de remplir le formulaire ci-dessous.<br /><br />
+ 	<form method="post" action="<?php echo $site_url; ?>connexion"><br />Pour vous connecter, merci de remplir le formulaire ci-dessous.<br /><br />
  		<input type="mail" placeholder="Adresse E-mail" name="mail" required /><br /><br />
 		<input type="password" placeholder="Password" name="password" required /><br /><br />
 		<input type="submit" value="Je me connecte !" />

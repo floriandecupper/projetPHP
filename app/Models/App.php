@@ -18,6 +18,38 @@ class App extends Prefab{
       return false;
     }
   }
+  function set($id,$array,$table) {
+    //Renvoyer l'objet de la bd en fonction de l'id et de la table renvoyée
+    //OU si n'existe pas, FALSE
+    $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
+    $objet->load(array('id=?',$id));
+    if(!$objet->dry()){
+      foreach($array as $id=>$value) 
+      {
+        $objet->$id=$value;
+        $objet->update();
+      }
+      return $objet;
+    }else{
+      return false;
+    }
+  }
+  function add($array,$table) {
+    $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
+    foreach($array as $id=>$value) 
+    {
+      $objet->$id=$value;
+    }
+    if($table=='pu_notifications') {
+      $objet->date=time();
+    }elseif($table!='pu_tags') 
+    {
+      $objet->date=time();
+      $objet->ip=F3::get('SERVER.REMOTE_ADDR');
+    }
+    $objet->save();
+    return $objet;
+  }
     function readMessage($id) {
     $message=new DB\SQL\Mapper(F3::get('dB'),'pu_message');
     $message->load(array('id=?',$id));
@@ -25,7 +57,7 @@ class App extends Prefab{
     $message->update();
     }
   
-    function gets($table,$query='id>?',$vals=array(0), $param=array('order'=>'date DESC','limit'=>'0,100')) {
+    function mget($table,$query='id>?',$vals=array(0), $param=array('order'=>'date DESC','limit'=>'1000')) {
         // if($vars!=array()) {
       $conditions=$vals;
       array_unshift($conditions,$query);
@@ -51,19 +83,7 @@ class App extends Prefab{
     }
   }
   
-  function addUser($mail, $password, $prenom, $nom, $description) 
-  {
-    $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
-    $user->nom=$nom;
-    $user->prenom=$prenom;
-    $user->password=md5($password);
-    $user->mail=$mail;
-    $user->description=$description;
-    $user->points=F3::get('start_points');
-    $user->activation=rand(1,9999999999);
-    $user->save();
-    return $user;
-  }
+
     function addCredits($id, $amount) 
   {
 
@@ -71,7 +91,7 @@ class App extends Prefab{
     $paiement->id_membre=$id;
     $paiement->montant=$amount;
     $paiement->date=time();
-    $paiement->ip=$_SERVER["REMOTE_ADDR"];
+    $paiement->ip=F3::get('SERVER.REMOTE_ADDR');
     $paiement->save();
     $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
     $user->load(array('id=?',$id));
@@ -97,6 +117,7 @@ class App extends Prefab{
     $user->load(array('mail=? AND password=?',$mail, $password));
     $pu_connexion=new DB\SQL\Mapper(F3::get('dB'),'pu_connexion');
     $date=time() - 3600;
+    
     $connexion0=$pu_connexion->find(array('mail=? AND date>? AND valid=?',$mail, $date, 0));
     if(count($connexion0)>4) {
       return 1;
@@ -106,16 +127,19 @@ class App extends Prefab{
         $connexion->date=time();
         $connexion->ip=$_SERVER['REMOTE_ADDR'];
       if(!$user->dry()){
-        $connexion->valid=1;
-        $connexion->save();
-        return $user;
+        if($user->activation==1) {
+          $connexion->valid=1;
+          $connexion->save();
+          return $user;
+        }else{
+          return 2;
+        }
       }else{
         $connexion->valid=0;
         $connexion->save();
         return 0;
       }
     }
-    
   }
     function oubli($mail) 
   {
@@ -172,26 +196,9 @@ class App extends Prefab{
   //
   //Annonces
   //
-  function addAnnounce($titre, $description, $prix, $id_user) 
-  {
-    $annonce=new DB\SQL\Mapper(F3::get('dB'),'pu_annonce');
-    $annonce->titre=$titre;
-    $annonce->id_membre=$id_user;
-    $annonce->description=nl2br($description);
-    $annonce->prix=$prix;
-    $annonce->etat=0;
-    $annonce->date=time();
-    $annonce->save();
-    return $annonce;
-  }
   function getAnnounces($nbr1=0, $nbr2=10) {
     $db=new DB\SQL\Mapper(F3::get('dB'),'pu_annonce');
     $annonce=$db->find(array('etat=?',0),array('order'=>'date DESC','limit'=>''.$nbr1.','.$nbr2.''));
-    return $annonce;
-  }
-  function show($id,$table) {
-    $annonce=new DB\SQL\Mapper(F3::get('dB'),$table);
-    $annonce->load(array('id=?',$id));
     return $annonce;
   }
   function signaler($id, $type, $message, $id_membre=0) {

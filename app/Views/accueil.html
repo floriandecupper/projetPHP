@@ -1,9 +1,14 @@
-<?php require 'app/Views/header.html'; ?>
-<?php if(!isset($user)) { ?><a href="connexion">Connexion</a> - <a href="inscription">Inscription</a><?php }else{ ?> <?php require 'app/Views/menu.html'; ?><br /><br /> <?php
+<?php require 'app/Views/header.html';
+if(!isset($user)) {
+	?>
+		<a href="inscription">S'inscrire</a> - <a href="connexion">Se connecter</a><br /><br />
+	<?php
 }
-
-foreach ($annonces as $i=>$annonce) {
-	echo "<a href='annonce/".$annonce->id."'>".$annonce->titre."</a><br />";
-}
-require 'app/Views/footer.html'; 
+?>
+<h2>Annonces</h2>
+<?php
+	foreach ($annonces as $i=>$annonce) {
+		echo "<a href='annonce/".$annonce->id."'>".$annonce->titre."</a><br />";
+	}
+	require 'app/Views/footer.html'; 
 ?>

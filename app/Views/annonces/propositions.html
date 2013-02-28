@@ -1,0 +1,13 @@
+<?php require 'app/Views/header.html';
+
+foreach ($propositions as $i=>$proposition) {
+	?>
+	<h2><a href='<?php echo $site_url."membre/".$proposition->id_membre; ?>'>ID membre : <?php echo $proposition->id_membre; ?></a></h2>
+	Message : <?php echo $proposition->message; ?><br />Prix : <?php echo $proposition->prix; ?><br />
+	Envoyé le <?php echo transformToDate($proposition->date); ?><br /><br />
+	<a href='<?php echo $site_url."proposition/".$proposition->id; ?>/deal'>Accepter (vous devez avoir assez de points)</a><br /><br />
+	<a href='<?php echo $site_url."message/nouveau/".$proposition->id_membre; ?>'>Ecrire à l'utilisateur</a><br /></hr /><br />
+	<?php
+}
+require 'app/Views/footer.html'; 
+?>

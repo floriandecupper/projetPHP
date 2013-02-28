@@ -1,0 +1,9 @@
+<?php require 'app/Views/header.html'; ?>
+ 	<form method="post" action=""><br />Envoyer un message :<br /><br />
+ 		<input type="text" value="<?php echo transformToPseudo($user0->prenom,$user0->nom); ?>" readonly />
+ 		<input type="hidden" name="destinataire" value="<?php echo $user0->id; ?>" />
+ 		<input type="text" placeholder="Titre" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required /><br /><br />
+		<textarea placeholder="Votre message" name="message" required ><?php if(isset($form_message)) { echo $form_message; } ?></textarea><br /><br />
+		<input type="submit" value="Envoyer !" />
+	</form>
+<?php require 'app/Views/footer.html'; ?>

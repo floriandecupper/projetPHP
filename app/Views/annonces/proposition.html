@@ -1,0 +1,7 @@
+<?php require 'app/Views/header.html'; ?>
+ 	<form method="post" action=""><br />Faire une proposition à l'annonce ID<?php echo $annonce->id; ?> : <br /><br />
+ 		Montant de la proposition : <input type="text" name="prix" <?php if(isset($form_prix)) { echo "value='$form_prix'"; } ?> /><br /><br />
+		<textarea placeholder="Message" name="message" required ><?php if(isset($form_message)) { echo $form_message; } ?></textarea><br /><br />
+		<input type="submit" value="Envoyer !" />
+	</form>
+<?php require 'app/Views/footer.html'; ?>

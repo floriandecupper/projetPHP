@@ -77,3 +77,26 @@ body {
     top: 20%;
     width: 500px;
 }
+.notifications {
+  cursor:pointer;
+}
+.croix {
+  width:10px;
+  height:10px;
+  background-color:black;
+  position:absolute;
+  right:0;
+  top:0;
+  cursor:pointer;
+}
+.notifications_popup {
+    background-color: #F8F4F8;
+    border: 1px solid #7D6212;
+    display: none;
+    height: 250px;
+    opacity: 0;
+    position: fixed;
+    bottom: 5%;
+    width: 500px;
+    left:20%;
+}

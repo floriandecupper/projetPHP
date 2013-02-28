@@ -1,13 +1,13 @@
 <?php
 class Member_controller{
  
- function __construct(){
-    if(F3::get('SESSION.user_id')==NULL) {
+function beforeroute(){
+    if(!F3::get('SESSION.user_id')) {
         F3::reroute('/connexion'); 
     }
     $App=new App();
-    $user=$App->getUser(F3::get('SESSION.user_id'));
-    $msgNonLus=$App->gets('pu_message','id_membre2=? AND lu=?', array($user->id,0));
+    $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
+    $msgNonLus=$App->mget('pu_message','id_membre2=? AND lu=?', array($user->id,0));
     F3::set('msgNonLus',count($msgNonLus));
     F3::set('user',$user);
     F3::set('page_title','Espace Membre');
@@ -20,7 +20,7 @@ class Member_controller{
     F3::set('page_title','Mon Compte');
     echo Views::instance()->render('member/mon-compte.html');
  }
- function monCompte_submit() {
+ function modifierProfil() {
     $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
     $mail=F3::get('POST.mail');
     $password=F3::get('POST.password1');
@@ -46,14 +46,11 @@ class Member_controller{
  function show() {
 
  	$App=new App();
-    $user0=$App->show(F3::get('PARAMS.idmembre'), 'pu_membre');
+    $user0=$App->get(F3::get('PARAMS.idmembre'), 'pu_membre');
     F3::set('page_title',$user0->prenom);
     F3::set('user0',$user0);
     echo Views::instance()->render('member/show.html');
  }
- 
- function __destruct(){
 
- } 
 }
 ?>

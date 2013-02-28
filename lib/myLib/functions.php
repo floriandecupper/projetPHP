@@ -6,4 +6,10 @@
 		$retour= date('d/m/Y',$date).' à '.date('H',$date).'h'.date('i',$date); 
 		return $retour;
 	}
+	function transformToText($text,$array) {
+		foreach($array as $value) {
+			$text=preg_replace('/VALUE/', $value, $text, 1);
+		}
+		return $text;
+	}
 ?>

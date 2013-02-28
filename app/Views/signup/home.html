@@ -6,6 +6,21 @@
 		<textarea placeholder="Vos services" name="description" ><?php if(isset($form_description)) { echo $form_description; } ?></textarea><br /><br />
 		<input type="password" placeholder="Password 1" name="password1" required /><br /><br />
 		<input type="password" placeholder="Password 2" name="password2" required /><br /><br />
+		<input type="text" placeholder="tags" name="tags" />
+		Disponibilités :
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="1">Lundi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="2">Mardi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="3">Mercredi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="4">Jeudi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="5">Vendredi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="6">Samedi<BR>
+                        <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="7">Dimanche<BR>
+                        	<!-- Remplacer text par hidden dans type pour les deux lignes ci-dessous -->
+                         Horaire (De 8h à 16h : 08,16) <input type="text" id="dispo_heures" name="dispo_heures" placeholder="xx,xx" size="5" /><br /><br />
+
+	                          	
+						ID parrain : <input type="text" <?php if($parrain!=0) { echo 'value="'.$parrain.'" readonly'; } ?> /><br /><br />
+	                          	
 		<input type="submit" value="Je m'inscris !" />
 	</form>
 <?php require 'app/Views/footer.html'; ?>

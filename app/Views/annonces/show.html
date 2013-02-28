@@ -1,5 +1,14 @@
 <?php require 'app/Views/header.html'; ?><br />
  	<p><?php echo $annonce->description; ?></p><br />
- 	<p><?php echo $annonce->prix; ?> Euros</p><br />
- 	<p>Postée le <?php echo transformToDate($annonce->date); ?> par <a href="../membre/<?php echo $user->id; ?>"><?php echo transformToPseudo($user->prenom,$user->nom); ?></a><br /><?php if($annonce->id_membre!=$user->id) { ?><a href="annonce/<?php echo $annonce->id; ?>/proposition">Faire une proposition sur cette annonce</a><br /><?php } ?></p><p class="signaler" class="lien">Signaler cette annonce</p>
+ 	<p><?php if($annonce->prix!='') { echo $annonce->prix.' Euros'; }else { "L'utilisateur n'a pas souhaité donner d'indication sur la récompense qu'il est prêt à donner"; } ?></p><br />
+ 	<p>Postée le <?php echo transformToDate($annonce->date); ?> par <a href="../membre/<?php echo $user0->id; ?>"><?php echo transformToPseudo($user0->prenom,$user0->nom); ?></a><br /><br />Cette annonce a reçu <?php echo $nbrePropositions; ?> propositions.<br /><br />
+ 		<?php 
+	 		if($user0->id!=$user->id) 
+	 		{ 
+	 			?>
+	 		<a href="<?php echo $site_url.'annonce/'.$annonce->id.'/proposition'; ?>">Faire une proposition sur cette annonce</a><br />
+	 			<?php 
+	 		} 
+	 	?>
+	 </p><br /><br /><p class="signaler" class="lien">Signaler cette annonce</p>
 <?php require 'app/Views/footer.html'; ?>

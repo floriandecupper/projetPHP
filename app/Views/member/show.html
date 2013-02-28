@@ -3,4 +3,5 @@
  	<p>Points : <?php echo $user0->points; ?></p><br />
  	<p>Tags : <?php echo $user0->tags; ?></p><br />
  	<p>Utilisateur inscrit le <?php echo transformToDate($user0->date); ?></p>
+ 	<a href="../message/nouveau/<?php echo $user0->id; ?>">Envoyer un message à ce membre</a>
 <?php require 'app/Views/footer.html'; ?>
