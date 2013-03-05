@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
+                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
+                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
+                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
+                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
+                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
+                    <li><a href="newannonce">Créer une annonce</a> |  </li>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+                <div class="wrapper">
+                    <h2><span>À propos</span></h2>
+                    <div class="content">
+                    <div class="espacement">  
+                    <p><span class="thesite">SHARING <span>SERVICES</span></span> est un site d’échange de services accessible à tous. Vous avez besoin d’un informaticien, vous n’en connaissez pas, et vous aimeriez que la réparation soit gratuite? C’est maintenant possible avec SHARING SERVICES.<br/>
+                    Le principe est simple : à votre inscription, vous recevez 10 crédits qui vous permettront de “rémunérer” la personne qui vous rendra un service. Plus de crédits? Rendez service à votre tour, et gagnez des crédits!</p> 
+                    <p><span class="thesite">SHARING <span>SERVICES</span></span> est le fruit d’une idée originale de 7 étudiants serviables et passionnés par le web.<br/> 
+                    Agathe, Aurore, Florian, Jennifer, Rémi et Sébastien sont tous étudiants en 3ème année à HETIC, l’école des métiers de l’internet.</p>
+                   <div class="memberscontent">
+                    <div class="members">
+                        <div class="container">
+                        <figure><img src="img/agathe.png" alt="Agathe"></figure>
+                        <h5>Agathe Lebon</h5>
+                        <p>Plombière</p>
+                        </div>
+                    </div>
+                    <div class="members">
+                         <div class="container">
+                        <figure><img src="img/aurore.png" alt="Aurore"></figure>
+                        <h5>Aurore Génisson</h5>
+                        <p>Mécanicienne</p>
+                        </div>
+                    </div>
+                    <div class="members">
+                         <div class="container">
+                        <figure><img src="img/jennfer.png" alt="Jennifer"></figure>
+                        <h5>Jennifer Vernalde</h5>
+                        <p>Couturier</p>
+                        </div>
+                    </div>
+                    <div class="members">
+                         <div class="container">
+                        <figure><img src="img/florian.png" alt="Florian"></figure>
+                        <h5>Florian Decupper</h5>
+                        <p>Déménageuse</p>
+                        </div>
+                    </div>
+                    <div class="members">
+                         <div class="container">
+                        <figure><img src="img/remi.png" alt="Rémi"></figure>
+                        <h5>Rémi Fayolle</h5>
+                        <p>Nourrice</p>
+                        </div>
+                    </div>
+                     <div class="members">
+                         <div class="container">
+                        <figure><img src="img/sebastien.png" alt="Sébastien"></figure>
+                        <h5>Sébastien Carbain</h5>
+                        <p>Esthéticien</p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+        
+
+</div>
+
+<script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
+                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
+                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
+                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
+                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
+                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
+                    <li><a href="newannonce">Créer une annonce</a> |  </li>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+                <div class="wrapper">
+                    <h2><span>Mon Profil</span></h2>
+                    <div class="content">
+                    <div class="espacement">  
+                      <div class="profil">
+                        <div class="recapitulatif">
+                          <ul>
+                            <li> <h3>Sébastien C.</h3>
+                          <i class="icon-message">Le contacter</i>
+                          <p>Bonjour à tous ! Je m’appelle Sébastien et je suis développeur web. Je suis également doué en plomberie, et je me débrouille avec une tondeuse à gazon. J’espère pouvoir vous rendre service !</p></li>
+                          <li><img src="" alt="photo profil">
+                            <label for="notes">Note moyenne :</label>
+                            <p>credits</p>  
+                            <p>140</p><img src="img/credits.png" alt="credits">  
+                          </li>
+                        </ul>
+                         
+                        </div>
+                        <div class="compétences">
+                           <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Mes compétences</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <p>Je sais faire :</p>
+                              </div>
+                            </div>
+                        </div>
+                          
+                        </div>
+                        <div class="gmap">
+                          <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Ma zone de déplacement</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <p>
+                              Gmap
+                              </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="disponibilités">
+                          <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Mes disponibilités</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                                      <p>En général je suis disponible le :</p>
+                          <div class="daycontent">
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="lundi" value="1" checked>
+                        <label for="lundi">LUNDI</label><br/></div>
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mardi" value="2"><label for="mardi">MARDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mercredi" value="3"><label for="mercredi">MERCREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="jeudi" value="4" checked><label for="jeudi">JEUDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="vendredi" value="5"><label for="vendredi">VENDREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="samedi" value="6" checked><label for="samedi">SAMEDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/>
+                          </div>
+                          </div>
+                          <p>De : 06h à 17h</p>
+                              </div>
+                            </div>
+                        </div>
+                  
+                        </div>
+                         <div class="services">
+                           <div class="box">
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Mes services</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <ul>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                                <li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li>
+                              </ul>
+                              </div>
+                        </div>
+                      </div>
+
+                          </div>
+                      </div>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+<script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

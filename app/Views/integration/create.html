@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+<link rel="stylesheet" href="css/iThing-min.css">
+<link href="css/customFile.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
+                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
+                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
+                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
+                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
+                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
+                    <li><a href="newannonce">Créer une annonce</a> |  </li>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+                <div class="wrapper">
+                    <h2><span>Créer une annonce</span></h2>
+                    <div class="content">
+                    <div class="espacement">  
+                   <form class="create" action="#">
+                       <fieldset>
+                       <label for="annonce">* Titre de l'annonce :</label>
+                       <input type="text" name="annonce" id="annonce" autofocus required >
+                       <label for="categorie" >* Catégorie :</label>
+                       <select name="categorie" id="categorie" required>
+                        <option value="">Sélectionner une catégorie</option>
+                          <option value="bricolage">bricolage</option>
+                          <option value="transport">transport</option>
+                          <option value="soin">soin</option>
+                          <option value="garde">garde</option>
+                       </select>
+                       <label for="description">* Description :</label>
+                       <textarea  rows="5"  name="description" id="description"  required>
+                       </textarea>
+                       <label for="recompense">* Récompense :</label>
+                        <input type="text" name="recompense" size="2" id="recompense" placeholder="25" required>
+                        <img src="img/credits.png" alt="credits"><div class="clear"></div>
+                        <label for="adresse">* Adresse :</label>
+                        <input type="text" name="adresse" id="adresse" value="17 bis rue du progrès, 93100 Montreuil">
+                         </fieldset>
+                         <fieldset>
+                        <span class="title"> Photos :</span>
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file"  />
+                        </div>
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file"  />
+                        </div>
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file"  />
+                        </div>
+                         </fieldset>
+                         <fieldset>
+                        <span class="title">* Disponibilités :</span>
+                        <div class="daycontent">
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="lundi" value="1" checked>
+                        <label for="lundi">LUNDI</label><br/></div>
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mardi" value="2"><label for="mardi">MARDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mercredi" value="3"><label for="mercredi">MERCREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="jeudi" value="4" checked><label for="jeudi">JEUDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="vendredi" value="5"><label for="vendredi">VENDREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="samedi" value="6" checked><label for="samedi">SAMEDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/>
+                          </div>
+                          </div>
+                          </fieldset>
+                          <fieldset>
+                        <div id="slider">
+                          <input type="hidden" id="min" name="min" />
+                          <input type="hidden" id="max" name="max" />
+                          <span id="sliderlabelg">00h</span>
+                          <span id="sliderlabeld">23h</span>
+                        </div>
+                         </fieldset>
+                        <input type="submit" value="publier">
+                        </form>
+                    <!-- <p>Les champs marqués d'un [*] sont obligatoires</p>
+                   
+                   <aside>
+                     <p>Pas assez de crédits ? Obtenez en <a href="#">ici</a></p>
+                     <p>Une annonce avec photographies est consultée cinq fois plus qu'une annonce ne disposant d'aucune images.</p>
+                   </aside>
+ -->
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script src="js/jQRangeSlider-min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript" src="js/jquery.customFile.js"></script>
+<script type="text/javascript">
+$(function(){
+$(".file").customFileInput({
+      'width'   : '118px', //width of button
+    'height'  : '45px',  //height of text
+      'btnText' : '+' //text of the button 
+  });
+})
+</script>
+<script>
+    //<!--
+      $("#slider").rangeSlider({
+        bounds: {min: 0, max: 23},
+        defaultValues:{min: 10, max: 19},
+
+          formatter:function(val){
+        return Math.round(val) + " h";
+      },
+      arrows:false
+    }).bind("valuesChanged", function(e, data){
+      console.log($("#min").val());
+      $("#min").val(Math.round(data.values.min));
+      $("#max").val(Math.round(data.values.max));
+      console.log($("#min").val());
+
+    });
+
+    $('.customup').customFileInput();
+    //-->
+</script>
+
+</body>
+</html>

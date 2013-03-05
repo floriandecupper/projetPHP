@@ -1,0 +1,14 @@
+.fileWrap{ float:left; border:1px solid #9fa0a3; background:#fff; padding:5px; position:relative; height: 87px;}
+.fileInput{ float:left; border:none 0px; padding:0 5px; height: 10px; width: 10%; min-width: 0px!important; visibility: hidden;}
+.fileButton{ position: relative;
+top: -53px;
+left: 35px;
+border: none 0px;
+background: #fff;
+margin: 0px;
+padding: 0px;
+font-size: 4.5em;
+color: grey;
+font-family: FuturaStd-Book;}
+
+

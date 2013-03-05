@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
+                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
+                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
+                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
+                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
+                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
+                    <li><a href="newannonce">Créer une annonce</a> |  </li>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+                <div class="wrapper">
+                    <h2><span>Parcourir les annonces</span></h2>
+                    <div class="content">
+                    <div class="espacement"> 
+                    <div class="parcourir">
+                   <div class="trie">
+                     <div class="triecontent">
+                          <h6>JE VEUX AIDER !</h6>
+                          <p>Ici, vous pouvez parcourir les annonces et ainsi proposer votre aide et vos compétences en échange de crédits. Vous pourrez ensuite ré-utiliser ses crédits afin de “payer” les autres membres pour les services qu’ils vous rendront.
+Votre recherche peut se faire en fonction de différents critères : catégories, date, localisation, etc...</p>
+                          <form action="#">
+                            <fieldset>
+                              <h4>Catégories / Compétences:</h4>
+                              <input type="radio" name="categories" value="all" checked> Voir toutes<br/>
+                              <input type="radio" name="categories" value="categories" > Plomberie<br/>
+                              <input type="radio" name="categories" value="design"> Design
+                              <br/>
+                              <input type="radio" name="categories" value="demenagement"> Déménagement<br/>    
+                            </fieldset>
+                            <fieldset>
+                              <h4>Distance de chez moi :</h4>
+                              <input type="radio" name="distance" value="1" checked> < 1km<br/>
+                              <input type="radio" name="distance" value="5" > 1-5 km<br/>
+                              <input type="radio" name="distance" value="10"> 5-10 km
+                              <br/>
+                              <input type="radio" name="distance" value="0"> Peu importe<br/> 
+                            </fieldset>
+                            <fieldset>
+                              <h4>Dates :</h4>
+                              <input type="date" min="2013-03-01" name="the_date">
+                              <input type="date" min="2013-03-01" name="the_date">
+                             <span> <input type="checkbox" name="nodate" value="nodate"><label for="nodate">Je n'ai pas de date de précise</label></span>
+                              <span><input type="checkbox" name="photos" value="photos"><label for="photos">Photos obligatoires</label></span>
+                            </fieldset>
+                            <fieldset>
+                              <h4>Crédits :</h4>
+                              <input type="radio" name="credits" value="5" checked> 1 - 5<br/>
+                              <input type="radio" name="credits" value="10" > 5 - 10<br/>
+                              <input type="radio" name="credits" value="15"> 10 - 15 km
+                              <br/>
+                              <input type="radio" name="credits" value="0"> Peu importe<br/> 
+                            </fieldset>
+                            <input type="submit" value="filtrer">
+
+                          </form>
+                          </div> 
+                     </div>
+                   </div>
+                      <div class="annonces">
+                        <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <img src="img/holo.png" alt="icons"><p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <img src="img/comment.png" alt="icons"><p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <img src="img/holo.png" alt="icons"><p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <img src="img/comment.png" alt="icons"><p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                      </div>
+                    <button type="button">CHARGER PLUS D'ANNONCES</button>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+<script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
