@@ -23,11 +23,11 @@ li{list-style:none}
 
 @font-face {
     font-family: 'mfg_labs_iconsetregular';
-    src: url('font/mfglabsiconset-webfont.eot');
-    src: url('font/mfglabsiconset-webfont.eot?#iefix') format('embedded-opentype'),
-         url('font/mfglabsiconset-webfont.woff') format('woff'),
-         url('font/mfglabsiconset-webfont.ttf') format('truetype'),
-         url('font/mfglabsiconset-webfont.svg#mfg_labs_iconsetregular') format('svg');
+    src: url('fonts/mfglabsiconset-webfont.eot');
+    src: url('fonts/mfglabsiconset-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/mfglabsiconset-webfont.woff') format('woff'),
+         url('fonts/mfglabsiconset-webfont.ttf') format('truetype'),
+         url('fonts/mfglabsiconset-webfont.svg#mfg_labs_iconsetregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -47,33 +47,33 @@ i, .icon {
 
     @font-face {
         font-family: 'FuturaStd-Heavy';
-        src: url('futurastdheavy.eot');
-        src: url('futurastdheavy.eot?#iefix') format('embedded-opentype'),
-             url('futurastdheavy.woff') format('woff'),
-             url('futurastdheavy.ttf') format('truetype'),
-             url('futurastdheavy.svg#futurastdheavy') format('svg');
+        src: url('fonts/futurastdheavy.eot');
+        src: url('fonts/futurastdheavy.eot?#iefix') format('embedded-opentype'),
+             url('fonts/futurastdheavy.woff') format('woff'),
+             url('fonts/futurastdheavy.ttf') format('truetype'),
+             url('fonts/futurastdheavy.svg#futurastdheavy') format('svg');
         font-weight: normal;
         font-style: normal;
     }
 
   @font-face {
         font-family: 'FuturaStd-CondensedBold';
-        src: url('futurastdcondensedbold.eot');
-        src: url('futurastdcondensedbold.eot?#iefix') format('embedded-opentype'),
-             url('futurastdcondensedbold.woff') format('woff'),
-             url('futurastdcondensedbold.ttf') format('truetype'),
-             url('futurastdcondensedbold.svg#futurastdcondensedbold') format('svg');
+        src: url('fonts/futurastdcondensedbold.eot');
+        src: url('fonts/futurastdcondensedbold.eot?#iefix') format('embedded-opentype'),
+             url('fonts/futurastdcondensedbold.woff') format('woff'),
+             url('fonts/futurastdcondensedbold.ttf') format('truetype'),
+             url('fonts/futurastdcondensedbold.svg#futurastdcondensedbold') format('svg');
         font-weight: normal;
         font-style: normal;
     }
 
   @font-face {
         font-family: 'FuturaStd-Book';
-        src: url('futurastdbook.eot');
-        src: url('futurastdbook.eot?#iefix') format('embedded-opentype'),
-             url('futurastdbook.woff') format('woff'),
-             url('futurastdbook.ttf') format('truetype'),
-             url('futurastdbook.svg#futurastdbook') format('svg');
+        src: url('fonts/futurastdbook.eot');
+        src: url('fonts/futurastdbook.eot?#iefix') format('embedded-opentype'),
+             url('fonts/futurastdbook.woff') format('woff'),
+             url('fonts/futurastdbook.ttf') format('truetype'),
+             url('fonts/futurastdbook.svg#futurastdbook') format('svg');
         font-weight: normal;
         font-style: normal;
     }

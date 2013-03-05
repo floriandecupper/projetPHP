@@ -95,13 +95,15 @@
         
         <div class="main">
                 <div class="wrapper">
-                	<h1><?php echo $page_title; ?></h1>
-			<p class="error" style="color:red"><?php if(isset($erreur)) echo $erreur; ?></p>
-            <p class="info" style="color:green"><?php if(isset($_GET['info']) AND isset(${'info_'.$_GET['info']})) { 
-                echo ${'info_'.$_GET['info']}; 
-            }elseif(isset($info)) {
-                echo $info;
-            }  ?></p>
+                	<h2><span><?php echo $page_title; ?></span></h2>
+                    <div class="content">
+                        <div class="espacement">  
+                			<?php if(isset($erreur)) { ?><p class="error" style="color:red"><?php echo $erreur; ?></p><?php } ?>
+                            <p class="info" style="color:green"><?php if(isset($_GET['info']) AND isset(${'info_'.$_GET['info']})) { 
+                                echo ${'info_'.$_GET['info']}; 
+                            }elseif(isset($info)) {
+                                echo $info;
+                            }  ?></p>
             
 <!-- FB -->
 <?php if(!isset($user)) 
