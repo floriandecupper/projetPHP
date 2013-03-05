@@ -12,4 +12,8 @@
 		}
 		return $text;
 	}
+	function transformToTags($tags) {
+    	$tags = preg_replace('/\s+/', '', $tags);
+  		return $tags;
+	}
 ?>

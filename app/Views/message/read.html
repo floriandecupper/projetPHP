@@ -10,9 +10,9 @@
 	{
 		?>
 		<h3>Répondre à ce message :</h3>
-		<form action="nouveau" method="POST">
+		<form action="<?php echo $site_url; ?>message/nouveau/<?php echo $message->id; ?>" method="POST">
 			<input type="hidden" name="titre" value="<?php echo 'Re: '.$message->titre; ?>" />
-			<input type="hidden" name="id_membre2" value="<?php echo $message->id_membre1; ?>" />
+			<input type="hidden" name="destinataire" value="<?php echo $message->id_membre1; ?>" />
 			<textarea name="message" placeholder="Votre réponse ici" required></textarea><br />
 			<input type="submit" value="Envoyer" />
 		</form>

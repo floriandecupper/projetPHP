@@ -2,6 +2,7 @@
 if(isset($user)) {
 	?>	
 		<div class="notifications_popup"><div class="croix"></div><p class="notifications_content"></p></div>
+		
 		<div class="bloc_membre"><p><?php echo transformToPseudo($user->prenom, $user->nom); ?> - <?php echo $user->points; ?> Switz - <span class="notifications">0 notifications</span> - <a href="<?php echo $site_url; ?>messages" class="messages"><?php echo $msgNonLus; ?> messages</a> - 
 			<a href="<?php echo $site_url; ?>deconnexion">Se déconnecter</a></p></div>
 	<?php

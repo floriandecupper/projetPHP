@@ -4,9 +4,9 @@
 	Acheter 10 crédits :
 <input type='hidden' value="9.99" name="amount" />
 <input name="currency_code" type="hidden" value="EUR" />
-<input name="return" type="hidden" value="<?php echo F3::get('site_url');?>paypal/return" />
-<input name="cancel_return" type="hidden" value="<?php echo F3::get('site_url');?>paypal/cancel" />
-<input name="notify_url" type="hidden" value="<?php echo F3::get('site_url');?>paypal/notify.php" />
+<input name="return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/return" />
+<input name="cancel_return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/cancel" />
+<input name="notify_url" type="hidden" value="<?php echo F3::get('site_url');?>paypal/paypal.php" />
 <input name="cmd" type="hidden" value="_xclick" />
 <input name="business" type="hidden" value="<?php echo F3::get('PAYPAL_user');?>" />
 <input name="item_name" type="hidden" value="10 Crédits" />

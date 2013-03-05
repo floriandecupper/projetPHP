@@ -1,0 +1,15 @@
+<?php require 'app/Views/header.html';
+?>
+<h2>Catégories</h2>
+<form method="POST" action="<?php echo $site_url; ?>admin/categories"><input type="text" name="categorie" /> 
+<?php
+	foreach ($categories as $i=>$categorie) {
+		echo "<a href='".$site_url."categorie/".$categorie->id."'>".$categorie->nom."(".$nbrAnnonces[$i].")</a>
+		<input type='checkbox' name='categories[]' value='".$categorie->id."' /><br />" ;
+	}
+	?>
+	<input type="submit" value="Supprimer les catégories cochées" /></form><br /><br />
+	<h2>Ajouter une catégorie</h2> <form method="POST" action="<?php echo $site_url; ?>admin/categories"><input type="text" name="categorie" /> <input type="submit" value="OK" /></form>
+	<?php
+	require 'app/Views/footer.html'; 
+?>

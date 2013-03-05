@@ -48,13 +48,18 @@ function beforeroute(){
     }
  
   
- function oubli(){
-    echo Views::instance()->render('connexion/oubli.html');
+ function oubliMDP(){
+    if(F3::get('VERB')=='POST') {
+        echo 'aight';
+        $App=new App();
+        $user0=$App->oubli(F3::get('POST.mail'));
+        echo Views::instance()->render('connexion/oubli2.html');
+    }else{
+        echo Views::instance()->render('connexion/oubli.html');
+    }
  }
    function oubli_submit(){
-    $App=new App();
-    $user0=$App->oubli(F3::get('POST.mail'));
-    echo Views::instance()->render('connexion/oubli2.html');
+    
   }
     function verification(){
         $App=new App();
@@ -84,7 +89,7 @@ function beforeroute(){
         }
     }
     F3::set('parrain',$id_parrain);
-    if(F3::get('VERB')=='POST') 
+    if(F3::get('VERB')=='POST' && F3::get('POST.nom'))
     {
         $erreur='';
         $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';  
@@ -110,6 +115,9 @@ function beforeroute(){
             if(is_array(F3::get('POST.dispo_jours'))) {
                 $dispo_jours = implode(",",F3::get('POST.dispo_jours'));
             }
+            if(F3::get('POST.tags')!='') {
+                $App->tags(F3::get('POST.tags'));
+            }
             $user=$App->add(array(
                 'mail'=>F3::get('POST.mail'), 
                 'password'=>md5(F3::get('POST.password1')), 
@@ -127,7 +135,7 @@ function beforeroute(){
             $mail=new Mail($user->mail, F3::get('site_mail'), '', 'Inscription sur '.F3::get('site_nom'), $contenu);
             $mail->send();
             
-            F3::reroute('/connexion'); 
+            F3::reroute('/connexion?info=inscription'); 
             
         }
         // Effet ricochet :
@@ -147,6 +155,25 @@ function beforeroute(){
         
     }else{
         echo Views::instance()->render('signup/home.html');
+    }
+  }
+  function connexionFB() {
+    $App=new App();
+    if(F3::get('SESSION.user_id'))
+    {
+        $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
+        if($user->id_fb==0) {
+            $App->set($user->id,array('id_fb'=>F3::get('POST.fb_id')),'pu_membre');
+        }
+        F3::reroute('/membre'); 
+    }else{
+        F3::mset(array(
+            'form_prenom'=>F3::get('POST.fb_prenom'),
+            'form_nom'=>F3::get('POST.fb_nom'),
+            'form_mail'=>F3::get('POST.fb_mail'),
+            'form_fb'=>F3::get('POST.fb_id')
+            ));
+        $this->signup();
     }
   }
 }

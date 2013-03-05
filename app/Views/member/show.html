@@ -1,7 +1,10 @@
-<?php require 'app/Views/header.html'; ?><br />
- 	<p>Description : <?php echo $user0->description; ?></p><br />
- 	<p>Points : <?php echo $user0->points; ?></p><br />
- 	<p>Tags : <?php echo $user0->tags; ?></p><br />
+<?php require 'app/Views/header.html'; 
+echo ($administrateur ? '<form action="'.$site_url.'admin/membre" method="POST">' : ''); 
+?><br />
+ 	<p> Description : <?php echo ($administrateur ? '<input type="text" name="description" value="' : ''); echo $user0->description; echo ($administrateur ? '" />' : ''); ?></p><br />
+ 	<p>Points : <?php echo ($administrateur ? '<input type="text" name="points" value="' : ''); echo $user0->points; echo ($administrateur ? '" />' : ''); ?></p><br />
+ 	<p>Tags : <?php echo ($administrateur ? '<input type="text" name="tags" value="' : ''); echo $user0->tags; echo ($administrateur ? '" />' : ''); ?></p><br />
+ 	<?php echo ($administrateur ? '<input type="hidden" name="membre" value="'.$user0->id.'" /><input type="submit" value="Modifier" /></form><form action="'.$site_url.'admin/membre" method="POST"><input type="hidden" name="notification" value="'.$user0->id.'" /><input type="submit" value="Envoyer un avertissement" /></form>' : ''); ?>
  	<p>Utilisateur inscrit le <?php echo transformToDate($user0->date); ?></p>
  	<a href="../message/nouveau/<?php echo $user0->id; ?>">Envoyer un message à ce membre</a>
 <?php require 'app/Views/footer.html'; ?>

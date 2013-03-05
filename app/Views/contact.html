@@ -1,0 +1,10 @@
+<?php require 'app/Views/header.html'; ?>
+ 	<form method="post" action="contact"><br />Afin de nous contacter, merci de remplir le formulaire ci-dessous.<br /><br />
+ 		<input type="text" placeholder="Votre Pseudo" name="pseudo" <?php if(isset($form_pseudo)) { echo "value='$form_pseudo'"; }elseif(isset($user)){ echo 'value="'.transformToPseudo($user->prenom,$user->nom).'"'; } ?> /><br /><br />
+<input type="mail" placeholder="Votre E-mail" name="mail" <?php if(isset($form_mail)) { echo "value='$form_mail'"; }elseif(isset($user)){echo 'value="'.$user->mail.'"';} ?> /><br /><br />
+<input type="text" placeholder="Titre du message" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required /><br /><br />
+
+		<textarea placeholder="Qu'avez-vous à nous dire ?" name="message" required ><?php if(isset($form_message)) { echo $form_message; } ?></textarea><br /><br />
+		<input type="submit" value="Envoyer !" />
+	</form>
+<?php require 'app/Views/footer.html'; ?>

@@ -1,8 +1,13 @@
-<?php require 'app/Views/header.html'; ?><br />
- 	<p><?php echo $annonce->description; ?></p><br />
- 	<p><?php if($annonce->prix!='') { echo $annonce->prix.' Euros'; }else { "L'utilisateur n'a pas souhaité donner d'indication sur la récompense qu'il est prêt à donner"; } ?></p><br />
- 	<p>Postée le <?php echo transformToDate($annonce->date); ?> par <a href="../membre/<?php echo $user0->id; ?>"><?php echo transformToPseudo($user0->prenom,$user0->nom); ?></a><br /><br />Cette annonce a reçu <?php echo $nbrePropositions; ?> propositions.<br /><br />
- 		<?php 
+<?php require 'app/Views/header.html'; 
+echo ($administrateur ? '<form action="'.$site_url.'admin/annonces" method="POST">' : ''); 
+?><br />
+ 
+	
+	
+ 	<?php echo ($administrateur ? '<input type="text" name="description" value="' : ''); echo $annonce->description; echo ($administrateur ? '" />' : ''); ?><br />
+ 	<?php if($annonce->prix!='') {  echo ($administrateur ?  '<input type="text" name="prix" value="' : ''); echo $annonce->prix; echo ($administrateur ? '" /> Euros' : ' Euros'); }else { "L'utilisateur n'a pas souhaité donner d'indication sur la récompense qu'il est prêt à donner"; } ?><br />
+ 	Postée le <?php echo transformToDate($annonce->date); ?> par <a href="../membre/<?php echo $user0->id; ?>"><?php echo transformToPseudo($user0->prenom,$user0->nom); ?></a><br /><br />Cette annonce a reçu <?php echo $nbrePropositions; ?> propositions.<br /><br />
+ 		<?php echo ($administrateur ? '<input type="hidden" name="annonce" value="'.$annonce->id.'" /><input type="submit" value="Modifier" /></form>' : ''); 
 	 		if($user0->id!=$user->id) 
 	 		{ 
 	 			?>
@@ -10,5 +15,5 @@
 	 			<?php 
 	 		} 
 	 	?>
-	 </p><br /><br /><p class="signaler" class="lien">Signaler cette annonce</p>
+	 <br /><br /><p class="signaler" class="lien">Signaler cette annonce
 <?php require 'app/Views/footer.html'; ?>

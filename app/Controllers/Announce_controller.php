@@ -13,9 +13,11 @@ class Announce_controller{
             $App=new App();
             $user=$App->get(F3::get('SESSION.user_id'), 'pu_membre');
             $msgNonLus=$App->mget('pu_message','id_membre2=? AND lu=?', array($user->id,0));
+
             F3::mset(array(
                 'msgNonLus'=>count($msgNonLus),
-                'user'=>$user
+                'user'=>$user,
+                'administrateur'=>$user->administrateur
             ));
         }
      }
@@ -48,12 +50,15 @@ class Announce_controller{
             {
                 $App=new App();
                 $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
-
+                if(F3::get('POST.tags')!='') {
+                    $App->tags(F3::get('POST.tags'));
+                }
                 $annonce=$App->add(array(
                     'id_membre'=>$user->id,
                     'titre'=>F3::get('POST.titre'), 
                     'description'=>F3::get('POST.description'), 
                     'prix'=>F3::get('POST.prix'), 
+                    'tags'=>F3::get('POST.tags'),
                     'etat'=>0
                 ),'pu_annonce');
 
@@ -63,6 +68,7 @@ class Announce_controller{
             F3::mset(array(
                 'form_titre'=>F3::get('POST.titre'),
                 'form_prix'=>F3::get('POST.prix'),
+                'form_prix'=>F3::get('POST.tags'),
                 'form_description'=>F3::get('POST.description'),
                 'erreur'=>$erreur
             ));
@@ -76,7 +82,48 @@ class Announce_controller{
         }
     }
     
-                
+        function commentaire(){
+
+        
+        $App=new App();
+
+        if(F3::get('VERB')=='POST') 
+        {
+            $annonce=$App->get(F3::get('POST.id_annonce'), 'pu_annonce');
+            if(!is_numeric(F3::get('POST.id_annonce')) || !$annonce) 
+            {
+                $erreur="Erreur : Une erreur est survenue.";
+            }elseif(strlen(F3::get('POST.message'))<1) 
+            {
+                $erreur="Erreur : Vous n'avez pas tapé votre message.";
+            }else
+            {
+                $App=new App();
+                $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
+
+                $commentaire=$App->add(array(
+                    'id_membre'=>$user->id,
+                    'id_annonce'=>F3::get('POST.id_annonce'), 
+                    'message'=>F3::get('POST.message')
+                ),'pu_commentaire');
+
+                F3::reroute('/annonce/'.$annonce->id);
+            }
+
+            F3::mset(array(
+                'form_message'=>F3::get('POST.message'),
+                'erreur'=>$erreur
+            ));
+
+            echo Views::instance()->render('annonces/new.html');
+
+        }else
+        {
+            $user=$App->get(F3::get('SESSION.user_id'), 'pu_membre');
+            echo Views::instance()->render('annonces/new.html');
+        }
+    }
+
 function proposition() {
         $App=new App();
         $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce');
@@ -252,13 +299,66 @@ function proposition() {
             if(F3::get('POST.id_membre')!=NULL) 
             {
                 //Ajout du type d'objet signalé
-                $signalement=$App->signaler(F3::get('POST.id'), F3::get('POST.type'), F3::get('POST.message'), F3::get('POST.id_membre'));
+                $signalement=$App->add(array(
+                    'id_annonce'=>F3::get('POST.id'), 
+                    'type'=>F3::get('POST.type'), 
+                    'message'=>F3::get('POST.message'), 
+                    'id_membre'=>F3::get('POST.id_membre')),
+                'pu_signalement');
             }else
             {
-                $signalement=$App->signaler(F3::get('POST.id'), F3::get('POST.type'), F3::get('POST.message'));
+                $signalement=$App->add(array(
+                    'id_annonce'=>F3::get('POST.id'), 
+                    'type'=>F3::get('POST.type'), 
+                    'message'=>F3::get('POST.message')),
+                'pu_signalement');
             }
             echo Views::instance()->render('signalement/submit.html');
         } 
     }
+    function recherche() 
+    {
+        $App=new App();
+        if(F3::get('VERB')=='POST') 
+        {
+            //Création tableau
+            $array=array();
+            if(F3::get('POST.recherche')!='') {
+            $tags=explode(',',F3::get('POST.recherche'));
+            echo F3::get('POST.recherche');
+            foreach($tags as $value) {
+              $annonces=$App->search($value,'pu_annonce');
+              foreach($annonces as $annonce) {
+                  if (array_key_exists($annonce->id, $array)) 
+                  {
+                      $array[$annonce->id]=$array[$annonce->id]+1;
+                  }else
+                  {
+                      $array[$annonce->id]=1;
+                  }
+              }
+            }
+                
+            $annonces=array();
+            foreach($array as $key=>$nbr) {
+              $annonces[]=$App->get($key,'pu_annonce');
+            }
+            if(count($annonces)<1) {
+                F3::set('erreur','Aucune annonce ne correspond aux tags sélectionnés.');
+            }
+            //Recherche pour chaque mot clé dans les annonces, à chaque fois trouvé, on teste si cette annonce est déjà stockée, si oui on ajoute le tag dans un tableau multidimensionnel, sinon on ajoute cette annonce au tableau
+            F3::set('annonces',$annonces);
+            }else{
+            $erreur='Une erreur est survenue';
+            $annonces=array();
+            F3::set('annonces',array());
+            }
+            echo Views::instance()->render('accueil.html');
+        }else {
+            F3::set('info', 'Page en cours de construction');
+            echo Views::instance()->render('contact.html');
+        }
+    }
+
 }
 ?>

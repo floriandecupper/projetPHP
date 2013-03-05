@@ -8,9 +8,12 @@ function beforeroute(){
     $App=new App();
     $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
     $msgNonLus=$App->mget('pu_message','id_membre2=? AND lu=?', array($user->id,0));
-    F3::set('msgNonLus',count($msgNonLus));
-    F3::set('user',$user);
-    F3::set('page_title','Espace Membre');
+    F3::mset(array(
+        'msgNonLus'=>count($msgNonLus),
+        'user'=>$user,
+        'administrateur'=>$user->administrateur,
+        'page_title'=>'Espace Membre'
+    ));
  }
  
  function home(){
@@ -38,13 +41,15 @@ function beforeroute(){
         $password=F3::get('user')->password;
     }
         $App=new App();
-        $user=$App->changeUser(F3::get('user')->id, $mail, $password, F3::get('POST.description'));
+        if(F3::get('POST.tags')!='') {
+            $App->tags(F3::get('POST.tags'));
+        }
+        $user=$App->set(F3::get('user')->id, array('mail'=>$mail,'password'=>$password,'description'=>F3::get('POST.description'),'tags'=>F3::get('POST.tags')),'pu_membre');
         F3::set('page_title','Mon Compte');
         F3::set('user0',$user);
         echo Views::instance()->render('member/show.html');
  }
  function show() {
-
  	$App=new App();
     $user0=$App->get(F3::get('PARAMS.idmembre'), 'pu_membre');
     F3::set('page_title',$user0->prenom);

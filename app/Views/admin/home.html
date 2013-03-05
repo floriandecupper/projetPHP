@@ -1,0 +1,15 @@
+<?php require 'app/Views/header.html';
+?>
+<h2>Users</h2>
+<?php
+	foreach ($users as $user) {
+		echo "<a href='membre/".$user->id."'>".transformToPseudo($user->prenom,$user->nom)."</a><br />";
+	}
+?>
+<h2>Annonces</h2>
+<?php
+	foreach ($annonces as $annonce) {
+		echo "<a href='membre/".$annonce->id."'>".$annonce->titre."</a><br />";
+	}
+	require 'app/Views/footer.html'; 
+?>

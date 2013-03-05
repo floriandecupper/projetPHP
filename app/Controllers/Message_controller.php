@@ -9,9 +9,12 @@ function beforeroute()
     $App=new App();
     $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
         $msgNonLus=$App->mget('pu_message','id_membre2=? AND lu=?', array($user->id,0));
-    F3::set('msgNonLus',count($msgNonLus));
-    F3::set('user',$user);
-    F3::set('page_title','Messagerie');
+    F3::mset(array(
+        'msgNonLus'=>count($msgNonLus),
+        'user'=>$user,
+        'administrateur'=>$user->administrateur,
+        'page_title'=>'Messagerie'
+    ));
  }
  
  function home()
@@ -31,7 +34,7 @@ function beforeroute()
     $App=new App();
     $message=$App->get(F3::get('PARAMS.idmessage'), 'pu_message');
     if(F3::get('user')->id==$message->id_membre2) {
-        $App->readMessage(F3::get('PARAMS.idmessage'));
+        $App->set($message->id, array('lu'=>1), 'pu_message');
     }
     $expediteur=$App->get($message->id_membre1, 'pu_membre');
     $destinataire=$App->get($message->id_membre2, 'pu_membre');

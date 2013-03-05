@@ -39,6 +39,9 @@ if(F3::get('POST.id')) {
             transformToPseudo($user->prenom,$user->nom).
             "</a>","<a href='".F3::get('site_url')."annonce/".$annonce->id."'>".
             $annonce->titre."</a><br /><hr /><br />"));
+        }elseif($notification->type=='avertissement') {
+
+            $reponse.=F3::get('avertissement_notification')."<br /><hr /><br />";
 
         }elseif($notification->type=='valider') {
             $proposition=$App->get($notification->id_objet,'pu_proposition');
@@ -55,10 +58,19 @@ if(F3::get('POST.id')) {
     }
 }elseif(F3::get('POST.nbrN')) {
     $notifications=$App->mget('pu_notifications','id_membre=? AND lu=?',array(F3::get('POST.nbrN'), 0),array('limit'=>'999'));
-    $reponse=count($notifications);
+    if(!$notifications) {
+        $reponse='0';
+    }else
+    {
+        $reponse=count($notifications);
+    }
 }elseif(F3::get('POST.nbrM')) {
     $messages=$App->mget('pu_message','id_membre2=? AND lu=?',array(F3::get('POST.nbrM'), 0),array('limit'=>'999'));
-    $reponse=count($messages);
+    if(!$messages) {
+        $reponse='0';
+    }else{
+        $reponse=count($messages);
+    }
 }
 echo $reponse;
 ?>

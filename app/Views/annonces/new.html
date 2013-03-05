@@ -2,6 +2,7 @@
  	<form method="post" action="creer-annonce"><br />Pour ajouter une annonce, merci de remplir le formulaire ci-dessous.<br /><br />
  		<input type="text" placeholder="Titre" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required /><br /><br />
 		<input type="text" placeholder="Indication du montant voulu comme récompense offert" name="prix" <?php if(isset($form_prix)) { echo "value='$form_prix'"; } ?> /><br /><br />
+<input type="text" placeholder="Tags séparés par une virgule" name="tags" <?php if(isset($form_tags)) { echo "value='$form_tags'"; } ?> /><br /><br />
 		<textarea placeholder="Description" name="description" required ><?php if(isset($form_description)) { echo $form_description; } ?></textarea><br /><br />
 		<input type="submit" value="Ajouter !" />
 	</form>

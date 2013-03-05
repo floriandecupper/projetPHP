@@ -11,6 +11,8 @@ class App extends Prefab{
     //Renvoyer l'objet de la bd en fonction de l'id et de la table renvoyée
     //OU si n'existe pas, FALSE
     $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
+
+
     $objet->load(array('id=?',$id));
     if(!$objet->dry()){
       return $objet;
@@ -34,6 +36,9 @@ class App extends Prefab{
       return false;
     }
   }
+  function update($objet) {
+    $objet->update();
+  }
   function add($array,$table) {
     $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
     foreach($array as $id=>$value) 
@@ -42,7 +47,7 @@ class App extends Prefab{
     }
     if($table=='pu_notifications') {
       $objet->date=time();
-    }elseif($table!='pu_tags') 
+    }elseif($table!='pu_tags' && $table!='pu_categorie') 
     {
       $objet->date=time();
       $objet->ip=F3::get('SERVER.REMOTE_ADDR');
@@ -50,19 +55,55 @@ class App extends Prefab{
     $objet->save();
     return $objet;
   }
-    function readMessage($id) {
-    $message=new DB\SQL\Mapper(F3::get('dB'),'pu_message');
-    $message->load(array('id=?',$id));
-    $message->lu=1;
-    $message->update();
+  function tags($tags){
+    $tags = transformToTags($tags);
+    $tags=explode(',',$tags);
+    foreach($tags as $tag) {
+      echo $tag;
+      $isset=$this->mget('pu_tags','tag=?',array($tag), array());
+      if(!$isset) {
+        $this->add(array('tag'=>$tag),'pu_tags');
+      }
     }
+  }
+  //   function addCredits($id, $amount) 
+  // {
+
+  //   $paiement=new DB\SQL\Mapper(F3::get('dB'),'pu_achat');
+  //   $paiement->id_membre=$id;
+  //   $paiement->montant=$amount;
+  //   $paiement->date=time();
+  //   $paiement->ip=F3::get('SERVER.REMOTE_ADDR');
+  //   $paiement->save();
+  //   $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
+  //   $user->load(array('id=?',$id));
+  //   if(!$user->dry()){
+  //     $user->points+=10;
+  //     $user->update();
+  //   }
+  //   return $paiement;
+  // }
   
+  //   function readMessage($id) {
+  //   $message=new DB\SQL\Mapper(F3::get('dB'),'pu_message');
+  //   $message->load(array('id=?',$id));
+  //   $message->lu=1;
+  //   $message->update();
+  //   }
+  function search($tag,$table) {
+    $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
+    $result=$objet->select('id', 'tags LIKE "%'.$tag.'%"');
+    return $result;
+  }
     function mget($table,$query='id>?',$vals=array(0), $param=array('order'=>'date DESC','limit'=>'1000')) {
         // if($vars!=array()) {
       $conditions=$vals;
       array_unshift($conditions,$query);
       $pu_table=new DB\SQL\Mapper(F3::get('dB'),$table);
       $objets=$pu_table->find($conditions, $param);
+      if(count($objets)==0) {
+        return false;
+      }
       return $objets;
     //Renvoyer l'objet de la bd en fonction de l'id et de la table renvoyée
     //OU si n'existe pas, FALSE
@@ -84,32 +125,16 @@ class App extends Prefab{
   }
   
 
-    function addCredits($id, $amount) 
-  {
-
-    $paiement=new DB\SQL\Mapper(F3::get('dB'),'pu_achat');
-    $paiement->id_membre=$id;
-    $paiement->montant=$amount;
-    $paiement->date=time();
-    $paiement->ip=F3::get('SERVER.REMOTE_ADDR');
-    $paiement->save();
-    $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
-    $user->load(array('id=?',$id));
-    if(!$user->dry()){
-      $user->points+=10;
-      $user->update();
-    }
-    return $paiement;
-  }
-  function changeUser($id, $mail, $password, $description) {
-    $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
-    $user->load(array('id=?',$id));
-    $user->mail=$mail;
-    $user->password=md5($password);
-    $user->description=$description;
-    $user->update();
-    return $user;
-  }
+  
+  // function changeUser($id, $mail, $password, $description) {
+  //   $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
+  //   $user->load(array('id=?',$id));
+  //   $user->mail=$mail;
+  //   $user->password=md5($password);
+  //   $user->description=$description;
+  //   $user->update();
+  //   return $user;
+  // }
   function connexion($mail, $password) 
   {
 
@@ -172,15 +197,15 @@ class App extends Prefab{
     $mail->send();
     return $user;
   }
-  function getUser($id) 
-  {
-    $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
-    $user->load(array('id=?',$id));
-    if(!$user->dry()){
-      return $user;
-    }
-    return false;
-  }
+  // function getUser($id) 
+  // {
+  //   $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
+  //   $user->load(array('id=?',$id));
+  //   if(!$user->dry()){
+  //     return $user;
+  //   }
+  //   return false;
+  // }
     function verification($id, $activation) 
   {
     $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
@@ -196,11 +221,11 @@ class App extends Prefab{
   //
   //Annonces
   //
-  function getAnnounces($nbr1=0, $nbr2=10) {
-    $db=new DB\SQL\Mapper(F3::get('dB'),'pu_annonce');
-    $annonce=$db->find(array('etat=?',0),array('order'=>'date DESC','limit'=>''.$nbr1.','.$nbr2.''));
-    return $annonce;
-  }
+  // function getAnnounces($nbr1=0, $nbr2=10) {
+  //   $db=new DB\SQL\Mapper(F3::get('dB'),'pu_annonce');
+  //   $annonce=$db->find(array('etat=?',0),array('order'=>'date DESC','limit'=>''.$nbr1.','.$nbr2.''));
+  //   return $annonce;
+  // }
   function signaler($id, $type, $message, $id_membre=0) {
     $signalement=new DB\SQL\Mapper(F3::get('dB'),'pu_signalement');
     $signalement->id_annonce=$id;
