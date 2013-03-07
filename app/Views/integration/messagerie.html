@@ -1,63 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
-<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
-<link rel="stylesheet" media="screen" href="css/style.css">
-<link rel="stylesheet" href="css/mfglabs_iconset.css">
-</head>
-<body>
-
-<div class="container">
-
-        <header>
-            <div class="userbar">
-                <div class="logo">
-                    <img src="img/logophp.png" alt="">
-                    <h1>SHARING<span class="services">SERVICES</span></h1>
-                </div>
-                <div class="clear"></div>
-                <ul>
-                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
-                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
-                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
-                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
-                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
-                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
-                </ul>
-            </div>
-        </header>
-
-        <nav>
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
-                    <li><a href="newannonce">Créer une annonce</a> |  </li>
-                    <li><a href="parcourir">Parcourir les annonces</a></li>
-                    <li>
-                        <form method='post' action='#' >    
-                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
-                        </form>
-                    </li>
-                </ul>
-
-                <select> 
-                <option value="" selected="selected">Menu</option> 
-                <option value="/">Flux d'actualités</option> 
-                <option value="/annonces/create">Créer une annonce</option> 
-                <option value="/annonces/parcourir">Parcourir les annonces</option> 
-                </select> 
-            </div>
-        </nav>
-        
-        <div class="main">
-                <div class="wrapper">
-                    <h2><span>Messagerie</span></h2>
-                    <div class="content">
-                    <div class="espacement">  
+<?php require 'app/Views/header.html'; ?>
                    <div class="messagerie">
                      <div class="messageriecontent">
                        <nav> <ul>
@@ -69,10 +10,38 @@
                          <li>le 28/02/2013, 15h27<br/> Sébastien C.</li>
                          <li><a href=""><i class="icon-cross_mark"></i></a></li></ul>
                        </div>
+                        <div class="messageouvert">
+                        <div class="messagecontent">
+                         <p>Bonjour,<br/>
+
+Concernant la réparation des WC, je souhaitais vous prévenir que j’étais disponible samedi de 14h à 18h si cela vous convient ? Répondez moi vite que je puisse m’organiser.
+Cordialement.</p>
+<form action="">
+<label for="reponse">Répondre à ce message :</label>
+<textarea name="reponse" id="" cols="30" rows="10"></textarea>
+<input type="submit" value="Envoyer">
+<div class="clear"></div>
+</form>
+</div>
+                       </div>
                        <div class="message">
                          <ul><li><h4>Aide réparation WC</h4></li>
                          <li>le 28/02/2013, 15h27<br/> Sébastien C.</li>
                          <li><a href=""><i class="icon-cross_mark"></i></a></li></ul>
+                       </div>
+                        <div class="messageouvert">
+                        <div class="messagecontent">
+                         <p>Bonjour,<br/>
+
+Concernant la réparation des WC, je souhaitais vous prévenir que j’étais disponible samedi de 14h à 18h si cela vous convient ? Répondez moi vite que je puisse m’organiser.
+Cordialement.</p>
+<form action="">
+<label for="reponse">Répondre à ce message :</label>
+<textarea name="reponse" id="" cols="30" rows="10"></textarea>
+<input type="submit" value="Envoyer">
+<div class="clear"></div>
+</form>
+</div>
                        </div>
                        <div class="message">
                          <ul><li><h4>Aide réparation WC</h4></li>
@@ -98,25 +67,21 @@ Cordialement.</p>
                          <li>le 28/02/2013, 15h27<br/> Sébastien C.</li>
                          <li><a href=""><i class="icon-cross_mark"></i></a></li></ul>
                        </div>
+                        <div class="messageouvert">
+                        <div class="messagecontent">
+                         <p>Bonjour,<br/>
+
+Concernant la réparation des WC, je souhaitais vous prévenir que j’étais disponible samedi de 14h à 18h si cela vous convient ? Répondez moi vite que je puisse m’organiser.
+Cordialement.</p>
+<form action="">
+<label for="reponse">Répondre à ce message :</label>
+<textarea name="reponse" id="" cols="30" rows="10"></textarea>
+<input type="submit" value="Envoyer">
+<div class="clear"></div>
+</form>
+</div>
+                       </div>
                      </div>
 
                    </div>
-
-                    <div class="clear"></div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                <footer>
-                   <ul>
-                       <li><a href="">A Propos</a> |</li>
-                       <li><a href="">CGU</a> |</li>
-                       <li><a href="">Mentions légales</a> |</li>
-                       <li><a href="">Contact</a> </li>
-                   </ul>
-                </footer>
-        </div>
-<script src="js/lib/jquery-1.9.1.min.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
+<?php require 'app/Views/footer.html'; ?>

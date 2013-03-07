@@ -1463,6 +1463,13 @@ text-align: center !important;
   content: "DIMANCHE";
 }
 
+/* SEB */
+.messageouvert {
+  height:0;
+  overflow-y:hidden;
+}
+
+
 /* Desktops and laptops ----------- */
 @media only screen 
 and (min-width : 1224px) {

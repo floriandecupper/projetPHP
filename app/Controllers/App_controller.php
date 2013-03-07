@@ -19,7 +19,14 @@ class App_controller
         }
         F3::set('page_title', 'Accueil');
     }
-    
+    function test() {
+        echo Views::instance()->render('integration/messagerie.html');
+    }
+/**
+Affichage Home
+@return 
+@param $userId int
+**/
     function home()
     {
         $App   = new App();

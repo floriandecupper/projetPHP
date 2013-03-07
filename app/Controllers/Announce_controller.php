@@ -34,52 +34,69 @@ class Announce_controller{
 
         F3::set('page_title','Créer une annonce');
         $App=new App();
-
+        
+        $pictures=array();
+        for($i=1;$i<=4;$i++) 
+        {
+            if (F3::get('FILES.photo'+$i))
+            {
+                if(F3::get('FILES.photo'+$i+'.error') > 0) 
+                {
+                    $erreur =F3::get('FILES.photo'+$i+'.error');
+                    set('erreur', $erreur);
+                }else{
+                    $pictures[]='test';
+                }
+            }
+        }
         if(F3::get('VERB')=='POST') 
         {
-            if(strlen(F3::get('POST.titre'))<2) 
-            {
-                $erreur="Erreur : Le titre doit contenir au moins 2 caractères.";
-            }elseif(strlen(F3::get('POST.description'))<20) 
-            {
-                $erreur="Erreur : La description doit contenir au moins 20 caractères.";
-            }elseif(!is_numeric(F3::get('POST.prix'))) 
-            {
-                $erreur="Erreur : Le prix n'est pas correcte.";
-            }else
-            {
-                $App=new App();
-                $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
-                if(F3::get('POST.tags')!='') {
-                    $App->tags(F3::get('POST.tags'));
-                }
-                $annonce=$App->add(array(
-                    'id_membre'=>$user->id,
-                    'titre'=>F3::get('POST.titre'), 
-                    'description'=>F3::get('POST.description'), 
-                    'prix'=>F3::get('POST.prix'), 
-                    'tags'=>F3::get('POST.tags'),
-                    'etat'=>0
-                ),'pu_annonce');
+            print_r(F3::get('FILES'));
+            // echo $_FILES["photo1"]["name"];
+        //     if(strlen(F3::get('POST.titre'))<2) 
+        //     {
+        //         $erreur="Erreur : Le titre doit contenir au moins 2 caractères.";
+        //     }elseif(strlen(F3::get('POST.description'))<20) 
+        //     {
+        //         $erreur="Erreur : La description doit contenir au moins 20 caractères.";
+        //     }elseif(!is_numeric(F3::get('POST.prix'))) 
+        //     {
+        //         $erreur="Erreur : Le prix n'est pas correcte.";
+        //     }else
+        //     {
+        //         $App=new App();
+        //         $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
+        //         if(F3::get('POST.tags')!='') {
+        //             $App->tags(F3::get('POST.tags'));
+        //         }
+        //         $annonce=$App->add(array(
+        //             'id_membre'=>$user->id,
+        //             'titre'=>F3::get('POST.titre'), 
+        //             'description'=>F3::get('POST.description'), 
+        //             'prix'=>F3::get('POST.prix'), 
+        //             'tags'=>F3::get('POST.tags'),
+        //             'etat'=>0
+        //         ),'pu_annonce');
 
-                F3::reroute('/annonce/'.$annonce->id);
-            }
+        //         F3::reroute('/annonce/'.$annonce->id);
+        //     }
 
-            F3::mset(array(
-                'form_titre'=>F3::get('POST.titre'),
-                'form_prix'=>F3::get('POST.prix'),
-                'form_prix'=>F3::get('POST.tags'),
-                'form_description'=>F3::get('POST.description'),
-                'erreur'=>$erreur
-            ));
+        //     F3::mset(array(
+        //         'form_titre'=>F3::get('POST.titre'),
+        //         'form_prix'=>F3::get('POST.prix'),
+        //         'form_prix'=>F3::get('POST.tags'),
+        //         'form_description'=>F3::get('POST.description'),
+        //         'erreur'=>$erreur
+        //     ));
 
-            echo Views::instance()->render('annonces/new.html');
+        //     echo Views::instance()->render('annonces/new.html');
 
-        }else
-        {
+        }
+            // else
+        // {
             $user=$App->get(F3::get('SESSION.user_id'), 'pu_membre');
             echo Views::instance()->render('annonces/new.html');
-        }
+        // }
     }
     
         function commentaire(){

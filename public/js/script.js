@@ -145,4 +145,18 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 			});
 		});
 	}
+		// $('.message').next().attr('data-hauteur',$(this).height());
+		$('.message').click(function() {
+			console.log($(this).next().css('height'));
+			console.log('aiiight1');
+			if($(this).next().css('height')!='0px') {
+				console.log($(this).next().css('height'));
+				$(this).next().animate({height:'0px'},500);
+				console.log($(this).next().css('height'));
+			}else{
+				console.log($(this).next().css('height'));
+				$(this).next().animate({height:'100%'},500);
+				console.log($(this).next().css('height'));
+			}
+		});
 });
