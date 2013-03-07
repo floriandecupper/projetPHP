@@ -84,7 +84,27 @@ class App_controller
         }
         echo json_encode($json_data);
     }
-    
+    function api() {
+        $App=new App();
+        $reponse='';
+        if(F3::get('POST.nbrN')) {
+            $notifications=$App->mget('pu_notifications','id_membre=? AND lu=?',array(F3::get('POST.nbrN'), 0),array('limit'=>'999'));
+            if(!$notifications) {
+                $reponse='0';
+            }else
+            {
+                $reponse=count($notifications);
+            }
+        }elseif(F3::get('POST.nbrM')) {
+            $messages=$App->mget('pu_message','id_membre2=? AND lu=?',array(F3::get('POST.nbrM'), 0),array('limit'=>'999'));
+            if(!$messages) {
+                $reponse='0';
+            }else{
+                $reponse=count($messages);
+            }
+        }
+        echo $reponse;
+    }
     function contact()
     {
         $App = new App();

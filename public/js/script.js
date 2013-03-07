@@ -81,7 +81,7 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 			$.ajax(
 			{
 				type: 'POST',
-				url:  site_url+'api.php',
+				url:  site_url+'api',
 				data: 'nbrN='+id_user,
 				success: function(data)
 				{
@@ -104,7 +104,7 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 			$.ajax(
 			{
 				type: 'POST',
-				url:  site_url+'api.php',
+				url:  site_url+'api',
 				data: 'nbrM='+id_user,
 				success: function(data)
 				{
@@ -129,7 +129,7 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 			$.ajax(
 			{
 				type: 'POST',
-				url:  site_url+'api.php',
+				url:  site_url+'api',
 				data: 'id='+id_user,
 				success: function(data)
 				{

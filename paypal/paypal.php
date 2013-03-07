@@ -47,19 +47,28 @@ require('../app/Models/App.php');
 				    $mail=new Mail("sebastien.carbain@gmail.com", F3::get('site_mail'), '', 'Test', $contenu);
 				    $mail->send();
                     $App=new App();
+                    $user=$App->get($data['custom'],'pu_membre');
+                    if($data['payment_amount']==10) {
+                        $nbreCredits=10;
+                    }elseif($data['payment_amount']==18) {
+                        $nbreCredits=20;
+                    }elseif($data['payment_amount']==35){
+                        $nbreCredits=50;
+                    }else{
+                        $nbreCredits=0;
+                    }
                     $paiement=$App->add(array(
-                        'id_membre'=>$data['custom'],
-                        'montant'=>$data['payment_amount']
+                            'id_membre'=>$data['custom'],
+                            'montant'=>$data['payment_amount']
                         ),'pu_achat');
                     $notification=$App->add(array(
-                    'id_membre'=>$data['custom'],
-                    'type'=>'paiement',
-                    'id_objet'=>$paiement->id,
-                    'lu'=>0
-                ), 'pu_notifications');
-                    $user=$App->get($data['custom'],'pu_membre');
-                    $App->set($user->id, array('points'=>$user->points+10), 'pu_membre');
-                
+                            'id_membre'=>$data['custom'],
+                            'type'=>'paiement',
+                            'id_objet'=>$paiement->id,
+                            'lu'=>0
+                        ), 'pu_notifications');
+                        
+                        $App->set($user->id, array('points'=>$user->points+$nbreCredits), 'pu_membre');
             }else if (strcmp ($res, "INVALID") == 0) {
                     $contenu = "Payment Invalid";
                     $mail=new Mail("sebastien.carbain@gmail.com", F3::get('site_mail'), '', 'Test', $contenu);

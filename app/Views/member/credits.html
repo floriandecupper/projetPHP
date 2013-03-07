@@ -2,7 +2,39 @@
 	
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 	Acheter 10 crédits :
-<input type='hidden' value="9.99" name="amount" />
+<input type='hidden' value="10" name="amount" />
+<input name="currency_code" type="hidden" value="EUR" />
+<input name="return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/return" />
+<input name="cancel_return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/cancel" />
+<input name="notify_url" type="hidden" value="<?php echo F3::get('site_url');?>paypal/paypal.php" />
+<input name="cmd" type="hidden" value="_xclick" />
+<input name="business" type="hidden" value="<?php echo F3::get('PAYPAL_user');?>" />
+<input name="item_name" type="hidden" value="10 Crédits" />
+<input name="no_note" type="hidden" value="1" />
+<input name="lc" type="hidden" value="FR" />
+<input name="bn" type="hidden" value="PP-BuyNowBF" />
+<input name="custom" type="hidden" value="<?php echo F3::get('user')->id; ?>" />
+<input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+</form>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+	Acheter 20 crédits :
+<input type='hidden' value="18" name="amount" />
+<input name="currency_code" type="hidden" value="EUR" />
+<input name="return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/return" />
+<input name="cancel_return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/cancel" />
+<input name="notify_url" type="hidden" value="<?php echo F3::get('site_url');?>paypal/paypal.php" />
+<input name="cmd" type="hidden" value="_xclick" />
+<input name="business" type="hidden" value="<?php echo F3::get('PAYPAL_user');?>" />
+<input name="item_name" type="hidden" value="10 Crédits" />
+<input name="no_note" type="hidden" value="1" />
+<input name="lc" type="hidden" value="FR" />
+<input name="bn" type="hidden" value="PP-BuyNowBF" />
+<input name="custom" type="hidden" value="<?php echo F3::get('user')->id; ?>" />
+<input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+</form>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+	Acheter 50 crédits :
+<input type='hidden' value="35" name="amount" />
 <input name="currency_code" type="hidden" value="EUR" />
 <input name="return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/return" />
 <input name="cancel_return" type="hidden" value="<?php echo F3::get('site_url');?>paiement/cancel" />
