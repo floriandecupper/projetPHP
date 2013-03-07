@@ -68,6 +68,7 @@ function beforeroute(){
             $erreur="Votre compte a bien été validé.";
         }else {
             $erreur="Une erreur est survenue, votre compte n'a pas été validé.";
+            F3::error(404);
         }
         F3::set('erreur',$erreur);
         echo Views::instance()->render('connexion/home.html');
@@ -142,7 +143,6 @@ function beforeroute(){
             $mail->send();
             
             F3::reroute('/connexion?info=inscription'); 
-            
         }
         // Effet ricochet :
         
