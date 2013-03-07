@@ -19,7 +19,13 @@
                          Horaire (De 8h à 16h : 08,16) <input type="text" id="dispo_heures" name="dispo_heures" placeholder="xx,xx" size="5" /><br /><br />
 
 	                          	
-						ID parrain : <input type="text" <?php if($parrain!=0) { echo 'value="'.$parrain.'" readonly'; } ?> /><br /><br />
+						<?php if(isset($id_parrain)) { ?>
+							ID parrain : <input type="text" name="id_parrain" <?php echo 'value="'.$id_parrain.'"'; ?> readonly /><br />
+						<?php
+						}
+						?>
+
+						<br />
 	                          	
 		<input type="submit" value="Je m'inscris !" />
 	</form>

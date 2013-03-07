@@ -82,18 +82,18 @@ function beforeroute(){
     F3::set('page_title','Inscription');
     $App=new App();
     $id_parrain=0;
-    if(F3::get('SESSION.parrain')!=false) {
-        if($App->get($id_parrain,'pu_membre')!=false)
-        {
-            $id_parrain=F3::get('SESSION.parrain');
-        }
+    if(F3::get('POST.id_parrain') && $App->get(F3::get('POST.id_parrain'),'pu_membre')!=false) {
+        $id_parrain=F3::get('POST.id_parrain');
+        F3::set('id_parrain',$id_parrain);
+    }elseif(F3::get('SESSION.id_parrain') && $App->get(F3::get('SESSION.id_parrain'),'pu_membre')!=false) {
+        $id_parrain=F3::get('SESSION.id_parrain');
+        F3::set('id_parrain',$id_parrain);
     }
-    F3::set('parrain',$id_parrain);
+    
     if(F3::get('VERB')=='POST' && F3::get('POST.nom'))
     {
         $erreur='';
-        $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';  
-
+        $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
         if(!preg_match($regex,F3::get('POST.mail'))) // Vérifie si l'email n'est pas valide
         {
             $erreur="Erreur : L'adresse E-Mail n'est pas valide.";
@@ -106,9 +106,6 @@ function beforeroute(){
         }elseif(F3::get('POST.password1')!=F3::get('POST.password2')) 
         {
             $erreur="Erreur : Les deux mots de passe ne correspondent pas.";
-        }elseif(!is_integer(F3::get('POST.parrain')) && F3::get('POST.parrain')!='')
-        {
-            $erreur="Erreur : L'ID de votre parrain n'est pas correcte.";
         }else
         {
             $dispo_jours='';
@@ -118,7 +115,7 @@ function beforeroute(){
             if(F3::get('POST.tags')!='') {
                 $App->tags(F3::get('POST.tags'));
             }
-            $user=$App->add(array(
+            $array=array(
                 'mail'=>F3::get('POST.mail'), 
                 'password'=>md5(F3::get('POST.password1')), 
                 'prenom'=>F3::get('POST.prenom'), 
@@ -128,9 +125,15 @@ function beforeroute(){
                 'dispo_jours'=>$dispo_jours,
                 'dispo_heures'=>F3::get('POST.dispo_heures'),
                 'points'=>F3::get('start_points'),
-                'id_parrain'=>$id_parrain,
                 'activation'=>rand(1,9999999999)
-            ),'pu_membre');
+            );
+            if(isset($id_parrain)) {
+                $array['id_parrain']=$id_parrain;
+                $parrain=$App->get($id_parrain,'pu_membre');
+                $parrain->points+=F3::get('bonus_parrainage');
+                $App->update($parrain);
+            }
+            $user=$App->add($array,'pu_membre');
             $contenu = "<p>Bonjour ".$user->prenom.",<br /><br />Vous venez de vous inscrire sur ".F3::get('site_nom').". Afin de valider votre inscription, vous devez cliquer sur le lien suivant :<br /><a href='".F3::get('site_url')."verification/".$user->id."/".$user->activation."'>".F3::get('site_url')."verification/".$user->id."/".$user->activation."</a><br /><br />Cordialement,<br />L'équipe de ".F3::get('site_nom');
             $mail=new Mail($user->mail, F3::get('site_mail'), '', 'Inscription sur '.F3::get('site_nom'), $contenu);
             $mail->send();
@@ -148,7 +151,6 @@ function beforeroute(){
             'form_tags'=>F3::get('POST.tags'),
             'form_dispo_jours'=>'',
             'form_dispo_heures'=>F3::get('POST.dispo_heures'),
-            'parrain'=>$id_parrain,
             'erreur'=>$erreur
         ));
         echo Views::instance()->render('signup/home.html');

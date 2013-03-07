@@ -1,0 +1,10 @@
+<?php require 'app/Views/header.html';
+	foreach ($propositions as $proposition) 
+	{
+		echo "<h2>".$proposition->annonce_titre."</h2>Etat (de l'annonce, à changer par celui de la proposition) : ".F3::get('etat'.$proposition->annonce_etat.'Annonce')."<br /><a href='".$site_url."annonce/".$proposition->annonce_id."'>Voir l'annonce</a> - ";
+			echo "Prix : ".$proposition->prix."<br />";
+			echo "Message : ".$proposition->message;
+		echo "<br /></hr /><br />";
+	}
+	require 'app/Views/footer.html'; 
+?>

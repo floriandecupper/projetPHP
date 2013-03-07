@@ -1,10 +1,10 @@
 <?php require 'app/Views/header.html';
 foreach ($annonces as $i=>$annonce) {
-	echo "<h2>".$annonce->titre."</h2>Etat : ".F3::get('etat'.$annonce->etat.'Annonce')."<br /><a href='".$site_url."annonce/".$annonce->id."'>Voir l'annonce</a> - ";
-	if($annonce->etat==0) {
-		echo "<a href='".$site_url."annonce/".$annonce->id."/propositions'>Voir les propositions (".$propositions[$i].")</a>";
-	}elseif($annonce->etat==1){
-		echo "<a href='".$site_url."proposition/".$propositions[$i]."/valider'>Valider le service (vous devez avoir assez de points)</a>";
+	echo "<h2>".$annonce['titre']."</h2>Etat : ".F3::get('etat'.$annonce['etat'].'Annonce')."<br /><a href='".$site_url."annonce/".$annonce['id']."'>Voir l'annonce</a> - ";
+	if($annonce['etat']==0) {
+		echo "<a href='".$site_url."annonce/".$annonce['id']."/propositions'>Voir les propositions (".$annonce['compte'].")</a>";
+	}elseif($annonce['etat']==1){
+		echo "<a href='".$site_url."proposition/".$annonce['pid']."/valider'>Valider le service (vous devez avoir assez de points)</a>";
 	}
 	echo "<br /></hr /><br />";
 }

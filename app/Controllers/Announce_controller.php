@@ -188,7 +188,7 @@ function proposition() {
             F3::reroute('/');
         }
         if($user->points<$proposition->prix) {
-            F3::reroute('/mes-annonces');
+            F3::reroute('/mes-annonces?erreur=credits');
         }else
         {
         $annonce=$App->set($proposition->id_annonce,array('etat'=>'1', 'id_proposition'=>$proposition->id),'pu_annonce');
@@ -211,9 +211,7 @@ function proposition() {
         $annonce=$App->set($proposition->id_annonce,array('etat'=>'2'),'pu_annonce');
         $user0=$App->get($proposition->id_membre, 'pu_membre');
         $user=F3::get('user');
-        if($user->points<$proposition->prix) {
-            F3::reroute('/mes-annonces');
-        }else {
+        if($user->points>=$proposition->prix) {
             $user->points=$user->points-$proposition->prix;
             $user->update();
             $user0->points=$user0->points+$proposition->prix;
@@ -224,18 +222,25 @@ function proposition() {
                     'id_objet'=>$annonce->id,
                     'lu'=>0
                 ), 'pu_notifications');
-            F3::reroute('/mes-annonces');
-        }
-        
-        $notification=$App->add(array(
-                    'id_membre'=>$proposition->id_membre,
-                    'type'=>'deal',
+            
+            $notification=$App->add(array(
+                    'id_membre'=>$user->id_membre,
+                    'type'=>'commenter',
                     'id_objet'=>$proposition->id,
                     'lu'=>0
                 ), 'pu_notifications');
+            F3::reroute('/mes-annonces');
+        }
         F3::reroute('/mes-annonces');
     }
-    function own()
+    function annonces()
+    {
+        $App=new App();
+        $annonces=$App->exec('SELECT a.etat,a.titre,a.id,p.id AS pid,count(p.id) AS compte FROM pu_annonce AS a INNER JOIN pu_proposition AS p ON a.id = p.id_annonce WHERE a.id_membre='.F3::get('user')->id);
+        F3::set('annonces',$annonces);
+        echo Views::instance()->render('annonces/mes-annonces.html');
+    }
+    function propo()
     {
         $App=new App();
         $annonces=$App->mget('pu_annonce','id_membre=?',array(F3::get('user')->id));
@@ -258,17 +263,22 @@ function proposition() {
     function propositions()
     {
         $App=new App();
-        $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce');
-        F3::mset(array(
-            'page_title'=>"Propositions reçus pour l'annonce ID".$annonce->id,
-            'annonce'=>$annonce,
-            'propositions'=>$App->mget('pu_proposition','id_annonce=?',array($annonce->id))
-        ));
-        echo Views::instance()->render('annonces/propositions.html');
-    } 
-    function show() 
-    {
 
+        if(F3::get('PARAMS.idannonce')) {  
+            $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce'); 
+            F3::mset(array(
+                'page_title'=>"Propositions reçus pour l'annonce ID".$annonce->id,
+                'annonce'=>$annonce,
+                'propositions'=>$App->mget('pu_proposition','id_annonce=?',array($annonce->id))
+            ));
+            echo Views::instance()->render('annonces/propositions.html');
+        }else {
+            $propositions=$App->mget('pu_proposition','id_membre=?',array(F3::get('user')->id));
+            echo Views::instance()->render('propositions.html');
+        }
+    } 
+    function annonce() 
+    {
         $App=new App();
         $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce');
         $nbrePropositions=count($App->mget('pu_proposition','id_annonce=?',array($annonce->id)));
@@ -282,7 +292,6 @@ function proposition() {
         ));
 
         echo Views::instance()->render('annonces/show.html');
-
     }
     function signaler() 
     {

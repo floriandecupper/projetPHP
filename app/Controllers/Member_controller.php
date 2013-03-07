@@ -49,6 +49,19 @@ function beforeroute(){
         F3::set('user0',$user);
         echo Views::instance()->render('member/show.html');
  }
+ function parrainage()
+    {
+        $App      = new App();
+        $filleuls = $App->mget('pu_membre', 'id_parrain=?', array(
+            F3::get('user')->id
+        ), array(
+            'order' => 'date DESC'
+        ));
+        if($filleuls!=false) {
+            F3::set('filleuls', $filleuls);
+        }
+        echo Views::instance()->render('member/parrainage.html');
+    }
  function show() {
  	$App=new App();
     $user0=$App->get(F3::get('PARAMS.idmembre'), 'pu_membre');

@@ -19,6 +19,12 @@ class App extends Prefab{
     }else{
       return false;
     }
+  }  
+  function exec($sql) {
+    echo $sql.'<br />';
+    $db=F3::get('dB');
+    return $db->exec($sql);
+    
   }
   function set($id,$array,$table) {
     //Renvoyer l'objet de la bd en fonction de l'id et de la table renvoyée
@@ -85,18 +91,19 @@ class App extends Prefab{
   // }
   
   //   function readMessage($id) {
-  //   $message=new DB\SQL\Mapper(F3::get('dB'),'pu_message');
-  //   $message->load(array('id=?',$id));
-  //   $message->lu=1;
-  //   $message->update();
+    //   $message=new DB\SQL\Mapper(F3::get('dB'),'pu_message');
+    //   $message->load(array('id=?',$id));
+    //   $message->lu=1;
+    //   $message->update();
   //   }
   function search($tag,$table) {
-    $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
-    $result=$objet->select('id', 'tags LIKE "%'.$tag.'%"');
-    return $result;
+      $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
+      $result=$objet->select('id', 'tags LIKE "%'.$tag.'%"');
+      return $result;
   }
-    function mget($table,$query='id>?',$vals=array(0), $param=array('order'=>'date DESC','limit'=>'1000')) {
-        // if($vars!=array()) {
+  
+  function mget($table,$query='id>?',$vals=array(0), $param=array('order'=>'date DESC','limit'=>'1000')) {
+    // if($vars!=array()) {
       $conditions=$vals;
       array_unshift($conditions,$query);
       $pu_table=new DB\SQL\Mapper(F3::get('dB'),$table);
@@ -109,7 +116,8 @@ class App extends Prefab{
     //OU si n'existe pas, FALSE
     
   }
-    function erase($id,$table) {
+    
+  function erase($id,$table) {
     //efface l'objet de la bd en fonction de l'id et de la table renvoyée
     $objet=new DB\SQL\Mapper(F3::get('dB'),$table);
     $objet->load(array('id=?',$id));
@@ -124,17 +132,6 @@ class App extends Prefab{
     }
   }
   
-
-  
-  // function changeUser($id, $mail, $password, $description) {
-  //   $user=new DB\SQL\Mapper(F3::get('dB'),'pu_membre');
-  //   $user->load(array('id=?',$id));
-  //   $user->mail=$mail;
-  //   $user->password=md5($password);
-  //   $user->description=$description;
-  //   $user->update();
-  //   return $user;
-  // }
   function connexion($mail, $password) 
   {
 

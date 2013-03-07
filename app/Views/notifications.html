@@ -1,0 +1,64 @@
+		<!-- <div class="wrapper"><?php if(isset($user)){ require 'app/Views/menu.html'; } ?> -->
+			
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - <?php echo $page_title; ?></title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo $site_url; ?>public/img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="<?php echo $site_url; ?>public/css/style.css">
+<link rel="stylesheet" href="<?php echo $site_url; ?>public/css/mfglabs_iconset.css">
+<link rel="stylesheet" href="<?php echo $site_url; ?>public/css/jquery.tagsinput.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://connect.facebook.net/fr_FR/all.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<?php echo $site_url; ?>public/js/jquery.tagsinput.min.js"></script>
+<script src="<?php echo $site_url; ?>public/js/script.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="container">
+        <?php
+        foreach($notifications as $notification) {
+            echo 'aiiiight';
+            $notification=$App->set($notification->id,array('lu'=>'1'),'pu_notifications');
+            if($notification->type=='proposition') {
+                $reponse.=transformToText($proposition_notification,array(
+                "<a href='".$site_url."membre/".$user->id."'>".
+                transformToPseudo($user->prenom,$user->nom).
+                "</a>","<a href='".$site_url."annonce/".$annonce->id."'>".
+                $annonce->titre."</a><br /><hr /><br />"));
+
+            }elseif($notification->type=='deal') {
+                $annonce=$App->get($notification->id_objet,'pu_annonce');
+                $proposition=$App->get($annonce->id_proposition,'pu_proposition');
+                $user=$App->get($annonce->id_membre,'pu_membre');
+
+                $reponse.=transformToText(F3::get('deal_notification'),array(
+                "<a href='".$site_url."membre/".$user->id."'>".
+                transformToPseudo($user->prenom,$user->nom).
+                "</a>","<a href='".$site_url."annonce/".$annonce->id."'>".
+                $annonce->titre."</a><br /><hr /><br />"));
+            }elseif($notification->type=='avertissement') {
+
+                $reponse.=F3::get('avertissement_notification')."<br /><hr /><br />";
+
+            }elseif($notification->type=='valider') {
+                $proposition=$App->get($notification->id_objet,'pu_proposition');
+                $annonce=$App->get($proposition->id_annonce,'pu_annonce');
+                $user=$App->get($proposition->id_membre,'pu_membre');
+
+                $reponse.=transformToText(F3::get('valider_notification'),array(
+                    $proposition->prix,
+                    "<a href='".$site_url."membre/".$user->id."'>".transformToPseudo($user->prenom,$user->nom)."</a>",
+                    "<a href='".$site_url."annonce/".$annonce->id."'>".$annonce->titre."</a><br /><hr /><br />"
+                ));
+            }
+
+        }
+    ?>
+</div>
+</body>
+</html>

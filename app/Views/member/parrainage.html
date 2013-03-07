@@ -1,0 +1,18 @@
+<?php require 'app/Views/header.html';
+if(isset($filleuls)) {
+
+
+foreach ($filleuls as $filleul) {
+	echo "<h2>".transformToPseudo($filleul->prenom,$filleul->nom)."</h2>Etat : ";
+	if($filleul->activation!=1) { echo "Compte non validé"; }else{ echo "Compte validé"; } 
+	echo "<br /></hr /><br />";
+}
+}else {
+	echo "Vous n'avez pas encore de filleuls";
+}
+?>
+Mon lien de parrainage : <br />
+<textarea><?php echo $site_url.$user->id; ?></textarea>
+<?php
+require 'app/Views/footer.html'; 
+?>
