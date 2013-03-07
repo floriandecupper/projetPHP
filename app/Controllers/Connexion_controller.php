@@ -94,7 +94,10 @@ function beforeroute(){
     {
         $erreur='';
         $regex='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
-        if(!preg_match($regex,F3::get('POST.mail'))) // Vérifie si l'email n'est pas valide
+        if($App->mget('pu_membre', 'mail=?', array(F3::get('POST.mail')))!=false) {
+            $erreur="Erreur : L'adresse E-Mail indiquée est déjà utilisée sur un autre compte.";
+        }
+        elseif(!preg_match($regex,F3::get('POST.mail'))) // Vérifie si l'email n'est pas valide
         {
             $erreur="Erreur : L'adresse E-Mail n'est pas valide.";
         }elseif(strlen(F3::get('POST.prenom'))<2) 
