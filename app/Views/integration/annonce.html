@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" media="screen" href="css/modifs.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+<link rel="stylesheet" href="css/iThing-min.css">
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <li><a href="sedeconnecter"><i class="icon-signout"></i><span class="bulle">Se déconnecter</span></a></li>
+                    <li><a href="lienprofil">Bonjour <span class="bold">Sébastien C.</span></a></li>
+                    <li><a href="profil"><i class="icon-user darkblue"></i><span class="bulle">Profil</span></a></li>
+                    <li><a href="services" class="notifications" data-notification="2"><i class="icon-calendar darkblue"></i><span class="bulle">Services</span></a></li>
+                    <li><a href="messagerie" class="notifications" data-notification="5"><i class="icon-message darkblue"></i><span class="bulle">Messageries</span></a></li>
+                    <li><a href="ajoutercredits" class="bold">17 <span class="credits"> crédits </span> <i class="icon-plus"></i></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html" class="current">Flux d'actualités</a> | </li>
+                    <li><a href="newannonce">Créer une annonce</a> |  </li>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+                <div class="wrapper">
+                    <div class="retour"><a href="#">< RETOUR AUX ANNONCES</a></div>
+                    <div class="content">
+                    <div class="espacement">  
+                      <div class="profil">
+                        <div class="annoncerecap">
+                          
+                                    <div class="contentservice">
+                                      <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Bonjour, j’ai besoin d’aide pour réparer ma fenêtre qui a été brisée en deux lors d’une précédente dispute avec mon mari (je vous passe les détails). Cela fait déjà 2 semaines que je dois survivre dans ce froid glacial, mes membres commencent à geler... Je vous en prie, sauvez moi ! Si vous m’aidez vous aurez le droit à une compensation. Donc n’hésitez pas à me contacter au plus vite. Si je ne suis pas encore morte je vous répondrais très vite ! Concernant la fenêtre, il y a un gros trou dedans comme vous pourrez le voir sur les photos. Il faudra surrement changer la vitre complètement. Bien sûr je pourrais aller acheter la vitre avant notre rdv, selon vos indications.”</p>
+                          </div>
+                         
+                        </div>
+                        <div class="photos">
+                           <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Photos</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <a href=""><span></span><img src="img/photo1.png" alt="photo1"></a>
+                              <a href=""><span></span><img src="img/photo2.png" alt="photo2"></a>
+                              <a href=""><span></span><img src="img/photo3.png" alt="photo3"></a>
+                              </div>
+                            </div>
+                        </div>
+                          
+                        </div>
+                        <div class="dispoannonce">
+                          <div class="box">
+                              <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Disponibilités</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                                      <p>Je suis disponible le :</p>
+                          <div class="daycontent">
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="lundi" value="1" checked>
+                        <label for="lundi">LUNDI</label><br/></div>
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mardi" value="2"><label for="mardi">MARDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mercredi" value="3"><label for="mercredi">MERCREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="jeudi" value="4" checked><label for="jeudi">JEUDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="vendredi" value="5"><label for="vendredi">VENDREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="samedi" value="6" checked><label for="samedi">SAMEDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/>
+                          </div>
+                          </div>
+                          <p>De : 06h à 17h</p>
+                              </div>
+                            </div>
+                        </div>
+
+                             
+                      
+                            </div>
+                          
+                        </div>
+                        <div class="adresse">
+                          
+                            <div class="bubble"> 
+                              <div class="rectangle"><h3>Adresse</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div id="map"></div>
+                              
+                        </div>
+
+                        </div>
+                        
+                      </div>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+<script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $("ul.notes-echelle").addClass("js");
+  $("ul.notes-echelle li").addClass("note-off");
+  
+  $("ul.notes-echelle input")
+    .focus(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-focus");
+      $(this).parent("li").addClass("note-focus");
+      $(this).parent("li").nextAll("li").addClass("note-off");
+      $(this).parent("li").prevAll("li").removeClass("note-off");
+      $(this).parent("li").removeClass("note-off");
+    })
+    .blur(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-focus");
+      if($(this).parents("ul.notes-echelle").find("li input:checked").length == 0) {
+        $(this).parents("ul.notes-echelle").find("li").addClass("note-off");
+      }
+    })
+    .click(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-checked");
+      $(this).parent("li").addClass("note-checked");
+    });
+    
+  $("ul.notes-echelle li").mouseover(function() {
+    $(this).nextAll("li").addClass("note-off");
+    $(this).prevAll("li").removeClass("note-off");
+    $(this).removeClass("note-off");
+  });
+    
+  $("ul.notes-echelle").mouseout(function() {
+    $(this).children("li").addClass("note-off");
+    $(this).find("li input:checked").parent("li").trigger("mouseover");
+  });
+  
+  $("ul.notes-echelle input:checked").parent("li").trigger("mouseover");
+  $("ul.notes-echelle input:checked").trigger("click");
+  
+});
+</script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="https://raw.github.com/HPNeo/gmaps/master/gmaps.js"></script>
+    <script type="text/javascript">
+    
+    function clean(){
+     cercle.visible=false; //test pourri de toggle de visibilité : cercle variable non reconnue
+    }
+      $(document).ready(function(){
+        map = new GMaps({
+          div: '#map',
+          lat: 48.85186,
+          lng: 2.420284,
+          zoom:12
+        });
+
+
+        
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+          GMaps.geocode({
+            address: $('#address').val().trim(),
+            callback: function(results, status)
+            {
+              if(status=='OK')
+              {
+                var latlng = results[0].geometry.location;
+                var center = map.setCenter(latlng.lat(), latlng.lng());
+                map.addMarker({
+                  lat: latlng.lat(),
+                  lng: latlng.lng()
+                });
+                //debut drawcircle
+              var cercle =  map.drawCircle({
+              
+              strokeColor: '#368299',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#368299',
+                fillOpacity: 0.35,
+                center:map.getCenter(),
+                radius: parseInt($('#distance').val())*1000     //recuperation de la distance en km convertie en m                      
+              });//fin drawcircle
+              }
+            }
+          });           
+        });//fin du geocoding form
+    });//fin du document ready fn
+    
+    </script>
+</body>
+</html>

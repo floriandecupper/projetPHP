@@ -1,19 +1,51 @@
 <?php require 'app/Views/header.html'; 
-echo ($administrateur ? '<form action="'.$site_url.'admin/annonces" method="POST">' : ''); 
+// echo ($administrateur ? '<form action="'.$site_url.'admin/annonces" method="POST">' : ''); 
 ?><br />
- 
-	
-	
- 	<?php echo ($administrateur ? '<input type="text" name="description" value="' : ''); echo $annonce->description; echo ($administrateur ? '" />' : ''); ?><br />
- 	<?php if($annonce->prix!='') {  echo ($administrateur ?  '<input type="text" name="prix" value="' : ''); echo $annonce->prix; echo ($administrateur ? '" /> Euros' : ' Euros'); }else { "L'utilisateur n'a pas souhaité donner d'indication sur la récompense qu'il est prêt à donner"; } ?><br />
- 	Postée le <?php echo transformToDate($annonce->date); ?> par <a href="../membre/<?php echo $user0->id; ?>"><?php echo transformToPseudo($user0->prenom,$user0->nom); ?></a><br /><br />Cette annonce a reçu <?php echo $nbrePropositions; ?> propositions.<br /><br />
- 		<?php echo ($administrateur ? '<input type="hidden" name="annonce" value="'.$annonce->id.'" /><input type="submit" value="Modifier" /></form>' : ''); 
+ <div class="profil">
+                        <div class="annoncerecap">
+                          
+                                    <div class="contentservice">
+                                      <h5><?php echo $annonce->titre; ?></h5>
+                                    <hr/>
+                                    <img src="<?php echo $site_url; ?>public/img/holo.png" alt="icons"><p class="uppercase"><?php echo transformToCountDown($annonce->date); ?> PAR <?php echo transformToPseudo($user0->prenom,$user0->nom); ?></p>
+                          <img src="<?php echo $site_url; ?>public/img/comment.png" alt="icons"><p>“<?php echo $annonce->description; ?>”</p>
+                          </div>
+                         
+                        </div>
+                        <div class="photos">
+                           <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Photos</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              		<?php if(isset($photos)) { 
+                              			foreach($photos as $photo) {
+                              				$extension = transformToExtension($photo->nom);
+
+                              				echo '<a href="'.$site_url.'zoom/img'.$photo->id.$extension.'"><span></span><img src="'.$site_url.'upload/img'.$photo->id.$extension.'" /></a>';
+                              			}
+
+                              		 }else{ echo '<span></span><img src="'.$site_url.'public/img/imgannonce.png" />'; } ?>
+                              </div>
+                            </div>
+                        </div>
+                          
+                        </div>
+                        
+
+                        </div>
+                        
+                      </div>
+                      <?php
 	 		if($user0->id!=$user->id) 
 	 		{ 
 	 			?>
 	 		<a href="<?php echo $site_url.'annonce/'.$annonce->id.'/proposition'; ?>">Faire une proposition sur cette annonce</a><br />
 	 			<?php 
-	 		} 
+	 		}
 	 	?>
-	 <br /><br /><p class="signaler" class="lien">Signaler cette annonce
+	 <br /><br />
 <?php require 'app/Views/footer.html'; ?>

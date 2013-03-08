@@ -32,43 +32,29 @@ Affichage Home
         $App   = new App();
         //Création tableau
         $array = array();
+        $annonces=$App->exec('SELECT a.titre,a.id,a.description, a.date, a.categorie, a.id_membre,u.prenom AS uprenom, u.nom AS unom FROM pu_annonce AS a INNER JOIN pu_membre AS u ON a.id_membre = u.id WHERE a.etat=0 ORDER BY date DESC LIMIT 0,3');
         
-        if (F3::get('SESSION.user_id')) {
-            $tags = explode(',', F3::get('user')->tags);
-            foreach ($tags as $value) {
-                $annonces = $App->search($value, 'pu_annonce');
-                foreach ($annonces as $annonce) {
-                    if (array_key_exists($annonce->id, $array)) {
-                        $array[$annonce->id] = $array[$annonce->id] + 1;
-                    } else {
-                        $array[$annonce->id] = 1;
-                    }
-                    
-                }
-                
-                
-            }
-            $annonces = array();
-            foreach ($array as $key => $nbr) {
-                $annonces[] = $App->get($key, 'pu_annonce');
-            }
-        } else {
-            if(F3::get('PARAMS.idparrain')) {
-
-                if($App->get(F3::get('PARAMS.idparrain'),'pu_membre')!=false) {
-                    F3::set('SESSION.id_parrain',F3::get('PARAMS.idparrain'));
-                }
-            }
-            $annonces = $App->mget('pu_annonce', 'etat=?', array(
-                0
-            ));
-        }
-        //Recherche pour chaque mot clé dans les annonces, à chaque fois trouvé, on teste si cette annonce est déjà stockée, si oui on ajoute le tag dans un tableau multidimensionnel, sinon on ajoute cette annonce au tableau
-        F3::set('annonces', $annonces);
+         F3::set('annonces', $annonces);
         echo Views::instance()->render('accueil.html');
     }
+    function zoom()
+    {
+        $App   = new App();
+        echo '<img src="'.F3::get('site_url').'upload/'.F3::get('PARAMS.img').'" />';
+    }
     
-    
+    function mentions() {
+        F3::set('page_title', "Mentions légales");
+        echo Views::instance()->render('mentions.html');
+    }
+    function cgu() {
+        F3::set('page_title', "Conditions Générales d'utilisation");
+        echo Views::instance()->render('cgu.html');
+    }
+    function apropos() {
+        F3::set('page_title', 'A propos');
+        echo Views::instance()->render('apropos.html');
+    }
     function doc()
     {
         echo Views::instance()->render('userref.html');
@@ -81,7 +67,7 @@ Affichage Home
         $tags      = $App->mget('pu_tags', 'id>?', array(
             0
         ), array(
-            'order',
+            'order'=>
             'tag ASC'
         ));
         $json_data = array();
@@ -181,22 +167,63 @@ Affichage Home
     function notifications()
     {
         $App           = new App();
-        $notifications = $App->mget('pu_notifications', 'id_membre=? AND lu=?', array(
+        $notifications0 = $App->mget('pu_notifications', 'id_membre=? AND lu=?', array(
             F3::get('user')->id,
             0
         ), array(
-            'order' => 'date DESC'
+            'order' => 'date DESC','limit'=>'4'
         ));
-        if (!$notifications) {
-            $notifications = $App->mget('pu_notifications', 'id_membre=? AND lu=?', array(
-                F3::get('user')->id,
-                1
-            ), array(
-                'limit' => 5,
-                'order' => 'date DESC'
-            ));
+        $notifArray=array();
+        if($notifications0!=false) {
+            foreach($notifications0 as $notification0) {
+                $App->set($notification0->id,array('lu'=>'1'),'pu_notifications');
+                if($notification0->type=='proposition') {
+
+                    $notification=$App->exec('SELECT n.*, p.*, u.nom AS unom, u.prenom AS uprenom, a.titre AS atitre
+                                        FROM pu_notifications AS n
+                                        INNER JOIN pu_proposition AS p ON n.id_objet= p.id
+                                        INNER JOIN pu_annonce AS a ON p.id_annonce = a.id
+                                        INNER JOIN pu_membre AS u ON p.id_membre=u.id
+                                        WHERE n.lu=0 AND n.id_membre='.F3::get('user')->id);
+                     $reponse=transformToText(F3::get('proposition_notification'),array(
+                    "<a href='".F3::get('site_url')."membre/".$notification['id_membre']."'>".
+                    transformToPseudo($notification['uprenom'],$notification['unom']).
+                    "</a>","<a href='".F3::get('site_url')."annonce/".$notification['id_annonce']."'>".
+                    $notification['atitre']."</a><br /><hr /><br />"));
+                    
+                }elseif($notification0->type=='deal') {
+
+                    $annonce=$App->get($notification0->id_objet,'pu_annonce');
+                    $proposition=$App->get($annonce->id_proposition,'pu_proposition');
+                    $user=$App->get($annonce->id_membre,'pu_membre');
+
+                    $reponse=transformToText(F3::get('deal_notification'),array(
+                    "<a href='".F3::get('site_url')."membre/".$user->id."'>".
+                    transformToPseudo($user->prenom,$user->nom).
+                    "</a>","<a href='".$site_url."annonce/".$annonce->id."'>".
+                    $annonce->titre."</a><br /><hr /><br />"));
+                    
+                }elseif($notification0->type=='avertissement') {
+
+                    $reponse=F3::get('avertissement_notification')."<br /><hr /><br />";
+
+                }elseif($notification0->type=='valider') {
+                    $proposition=$App->get($notification0->id_objet,'pu_proposition');
+                    $annonce=$App->get($proposition->id_annonce,'pu_annonce');
+                    $user=$App->get($proposition->id_membre,'pu_membre');
+
+                    $reponse=transformToText(F3::get('valider_notification'),array(
+                        $proposition->prix,
+                        "<a href='".$site_url."membre/".$user->id."'>".transformToPseudo($user->prenom,$user->nom)."</a>",
+                        "<a href='".$site_url."annonce/".$annonce->id."'>".$annonce->titre."</a><br /><hr /><br />"
+                    ));
+                }elseif($notification0->type=='paiement') {
+                    $reponse= "Votre paiement a bien été enregistré, les crédits ont été ajouté à votre compte.<br /><hr /><br />";
+                }
+                $notifArray[]=$reponse;
+            }
         }
-        F3::set('notifications', $notifications);
+        F3::set('notifications', $notifArray);
         echo Views::instance()->render('notifications.html');
         
         

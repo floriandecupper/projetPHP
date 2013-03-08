@@ -1,14 +1,94 @@
 <?php require 'app/Views/header.html';
 if(!isset($user)) {
 	?>
-		<a href="inscription">S'inscrire</a> - <a href="connexion">Se connecter</a><br /><br />
 	<?php
 }
 ?>
-<h2>Annonces</h2>
+<ul class="bxslider">
+                            <li><img src="<?php echo $site_url; ?>public/img/bienvenue.png" /></li>
+                            <li><img src="<?php echo $site_url; ?>public/img/etapes.png" /></li>
+                            <li><img src="<?php echo $site_url; ?>public/img/reseaux.png" /></li>
+                        </ul>
+                      <div class="blocks">
+                        <?php if(!isset($user)) {
+                          ?>
+                        <div class="devenirmembre">
+                        <div class="box"> <!-- Main Container -->    
+
+                          <div class="bubble"> <!-- Bubble -->
+                               <div class="rectangle"><h3>DEVENIR MEMBRE</h3></div> <!-- Rectangle with a title -->
+                                <div class="triangle-l"></div> <!-- Left triangle -->
+                                <div class="triangle-r"></div> <!-- Right triangle -->
+                                <div class="info">
+                                    <p>
+                                    Partagez vos compétences afin d’échanger des services avec les autres membres de la communauté SHARING SERVICE. Pour cela inscrivez vous gratuitement .
+                                    </p>
+                                    <form action="<?php echo $site_url; ?>inscription" method="POST">
+                                        <label for="mail">* Email :</label><input type="text" name="mail">
+                                        <label for="nom">* Nom :</label><input type="text" name="nom">
+                                        <label for="prenom">* Prénom :</label><input type="text" name="prenom">
+                                        <input type="hidden" name="accueil" value="1" />
+                                        <input type="submit" value="S'INSCRIRE">
+                                    </form>
+                                </div>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="dejamembre">
+                      <div class="box">
+             
+                              
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>DÉJÀ MEMBRE ?</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <p>
+                              Identifiez-vous.
+                              </p>
+                              <form action="<?php echo $site_url; ?>connexion">
+                                  <label for="mail">* Email :</label><input type="text" name="mail">
+                                  <label for="password">* Mot de passe :</label><input type="text" name="password">
+                                  <input type="submit" value="SE CONNECTER">
+                              </form>
+                              </div>
+                            </div>
+            </div>
+            </div>
+            <?php
+          }
+          ?>
+            <div class="clear"></div>
+            <h2><span>Les dernières annonces</span></h2>
+            <div class="annonces">
+                        
+                        <?php
+  foreach ($annonces as $i=>$annonce) {
+    ?>
+
+                           <div class="annonce"><img src="<?php echo $site_url; if(isset($image)) { echo 'upload/'.$image; }else{ echo 'public/img/imgannonce.png'; } ?>" alt="">
+                          <h4><?php echo $annonce['titre']; ?></h4>
+                          <img src="<?php echo $site_url; ?>public/img/holo.png" alt="icons"><p class="uppercase">POSTE <?php echo transformToCountDown($annonce['date']); ?> PAR <?php echo transformToPseudo($annonce['uprenom'],$annonce['unom']); ?> DANS <?php echo $annonce['categorie']; ?></p>
+                          <img src="<?php echo $site_url; ?>public/img/comment.png" alt="icons"><p><?php echo $annonce['description']; ?></p>
+
+                          <a href='annonce/<?php echo $annonce['id']; ?>'>Voir l'annonce</a>
+                          <a href='membre/<?php echo $annonce['id_membre']; ?>'>Voir l'annonceur</a>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                          <div class="annonce discover">
+                            <div class="discovercontent">
+                          <h3>Découvre toutes<br/> nos annonces</h3>
+                            <img src="<?php echo $site_url; ?>public/img/eye.png" alt="eye">
+                          <button>plus d'annonces ></button>
+                          </div>
+                        </div>
+                        </div>
+                          
+                     
+
+            </div>
 <?php
-	foreach ($annonces as $i=>$annonce) {
-		echo "<a href='annonce/".$annonce->id."'>".$annonce->titre."</a><br />";
-	}
 	require 'app/Views/footer.html'; 
 ?>

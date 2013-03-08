@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="fr-FR"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> 
+<head>
+  <title>Sharing Services</title>
+   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# sharingservices: http://ogp.me/ns/fb/sharingservices#">
+  <meta property="fb:app_id" content="159447630878612" /> 
+  <meta property="og:type"   content="sharingservices:announcement" /> 
+  <meta property="og:url"    content="http://www.sharingservices.fr/aurore/annonce.html" /> 
+  <meta property="og:title"  content="repeindre les murs de mes toilettes" /> 
+  <meta property="og:image"  content="http://images.lpcdn.ca/924x615/201011/03/314958-toilette-aqua-mural-toto-48.jpg" /> 
+  
+   <script type="text/javascript">
+	   function postAnswer()
+	   {
+		   FB.api(
+		   '/me/sharingservices:answer',
+		   'post',
+	        { announcement: 'http://www.sharingservices.fr/aurore/annonce.html' },
+	        function(response) {
+	           if (!response || response.error) {
+	              console.log(response.error); 
+	           } else {
+	              alert('Answer was successful! Action ID: ' + response.id);
+	           }
+	        });
+	  }
+  </script>
+</head>
+<body>
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '159447630878612', // App ID
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/fr_FR/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+  </script>
+
+  <fb:login-button show-faces="true" width="200" max-rows="1" scope="publish_actions">
+  </fb:login-button>
+
+  <h3>prout</h3>
+
+   <form>
+    <input type="button" value="Publish" onclick="postAnswer()" />
+  </form>
+  
+</body>
+</html>

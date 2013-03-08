@@ -1,10 +1,15 @@
-<?php require 'app/Views/header.html'; ?>
- 	<form method="post" action="contact"><br />Afin de nous contacter, merci de remplir le formulaire ci-dessous.<br /><br />
- 		<input type="text" placeholder="Votre Pseudo" name="pseudo" <?php if(isset($form_pseudo)) { echo "value='$form_pseudo'"; }elseif(isset($user)){ echo 'value="'.transformToPseudo($user->prenom,$user->nom).'"'; } ?> /><br /><br />
-<input type="mail" placeholder="Votre E-mail" name="mail" <?php if(isset($form_mail)) { echo "value='$form_mail'"; }elseif(isset($user)){echo 'value="'.$user->mail.'"';} ?> /><br /><br />
-<input type="text" placeholder="Titre du message" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required /><br /><br />
+<?php require 'app/Views/header.html'; ?>  
+                   <form id="contact" method="post" action="contact">
+                       <label for="pseudo">Pseudo :</label>
+                       <input type="text" name="pseudo" id="pseudo" <?php if(isset($form_pseudo)) { echo "value='$form_pseudo'"; }elseif(isset($user)){ echo 'value="'.transformToPseudo($user->prenom,$user->nom).'"'; } ?> autofocus required >
+                       <label for="email">Email :</label>
+                       <input type="email" name="mail" id="mail" <?php if(isset($form_mail)) { echo "value='$form_mail'"; }elseif(isset($user)){echo 'value="'.$user->mail.'"';} ?> required>
+                       <label for="titre">Sujet :</label>
+                       <input type="text" id="titre" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?>  required>
+                       <label for="message">Message :</label>
+                        <input type="text" name="message" id="message" <?php if(isset($form_message)) { echo $form_message; } ?> required>
+                        
+                        <input type="submit" value="envoyer">
 
-		<textarea placeholder="Qu'avez-vous à nous dire ?" name="message" required ><?php if(isset($form_message)) { echo $form_message; } ?></textarea><br /><br />
-		<input type="submit" value="Envoyer !" />
-	</form>
-<?php require 'app/Views/footer.html'; ?>
+                   </form>
+    <?php require 'app/Views/footer.html'; ?>

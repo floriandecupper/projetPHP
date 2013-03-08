@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sharing Services - Accueil</title> <!-- Sharing Services - Sébastien C. (2) -->
+<meta name="description" content="Site communautaire de partage de services. Le flux d'actualité vous permet de voir toutes les nouvelles annonces correspondant à vos critères.">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
+<link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" href="css/mfglabs_iconset.css">
+<link rel="stylesheet" href="css/modifs.css">
+
+<link href="css/jquery.bxslider.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container">
+
+        <header>
+            <div class="userbar">
+                <div class="logo">
+                    <img src="img/logophp.png" alt="">
+                    <h1>SHARING<span class="services">SERVICES</span></h1>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                   
+                    <li> <form class="connection" action=""><label for="login">Login :</label><input type="text" id="login" name="login"><label for="mdp">Mot de passe :</label><input type="password" name="mdp" id="mdp"><input type="submit" value="se connecter"></form></li>
+                    <li><div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div></li>
+                </ul>
+            </div>
+        </header>
+
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a href="parcourir">Parcourir les annonces</a></li>
+                    <li>
+                        <form method='post' action='#' >    
+                        <input type="search" size="35" placeholder="Rechercher..." name="the_search">
+                        </form>
+                    </li>
+                </ul>
+
+                <select> 
+                <option value="" selected="selected">Menu</option> 
+                <option value="/">Flux d'actualités</option> 
+                <option value="/annonces/create">Créer une annonce</option> 
+                <option value="/annonces/parcourir">Parcourir les annonces</option> 
+                </select> 
+            </div>
+        </nav>
+        
+        <div class="main">
+
+                <div class="wrapper">
+                    <div class="espace"></div>
+                    <div class="content">
+                      <div class="espacement">
+                         <ul class="bxslider">
+                            <li><img src="img/bienvenue.png" /></li>
+                            <li><img src="img/etapes.png" /></li>
+                            <li><img src="img/reseaux.png" /></li>
+                        </ul>
+                      <div class="blocks">
+                        <div class="devenirmembre">
+                        <div class="box"> <!-- Main Container -->    
+
+                          <div class="bubble"> <!-- Bubble -->
+                               <div class="rectangle"><h3>DEVENIR MEMBRE</h3></div> <!-- Rectangle with a title -->
+                                <div class="triangle-l"></div> <!-- Left triangle -->
+                                <div class="triangle-r"></div> <!-- Right triangle -->
+                                <div class="info">
+                                    <p>
+                                    Partagez vos compétences afin d’échanger des services avec les autres membres de la communauté SHARING SERVICE. Pour cela inscrivez vous gratuitement .
+                                    </p>
+                                    <form action="#">
+                                        <label for="">* Email :</label><input type="text">
+                                        <label for="">* Confirmation e-mail :</label><input type="text">
+                                        <label for="">* Mot de passe :</label><input type="text">
+                                        <input type="submit" value="S'INSCRIRE">
+                                    </form>
+                                </div>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="dejamembre">
+                      <div class="box">
+             
+                              
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>DÉJÀ MEMBRE ?</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              <div class="info">
+                              <p>
+                              Identifiez-vous.
+                              </p>
+                              <form action="#">
+                                  <label for="">* Email :</label><input type="text">
+                                  <label for="">* Mot de passe :</label><input type="text">
+                                  <input type="submit" value="SE CONNECTER">
+                              </form>
+                              </div>
+                            </div>
+            </div>
+            </div>
+            <div class="clear"></div>
+            <h2><span>Les dernières annonces</span></h2>
+            <div class="annonces">
+                        <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <img src="img/holo.png" alt="icons"><p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <img src="img/comment.png" alt="icons"><p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <img src="img/holo.png" alt="icons"><p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <img src="img/comment.png" alt="icons"><p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce">
+                          <img src="img/imgannonce.png" alt="">
+                          <h4>COURS DE PHOTOSHOP</h4>
+                          <p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <p>“Je manque cruellement de technique en PhotoShop mais je dois réaliser une invitation de mariage pour l’ex de mon copain. Aidez moi SVP !”</p>
+
+                          <a href="">Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                           <div class="annonce discover">
+                            <div class="discovercontent">
+                          <h3>Découvre toutes<br/> nos annonces</h4>
+                            <img src="img/eye.png" alt="eye">
+                          <button>plus d'annonces ></button>
+                          </div>
+                        </div>
+                          
+                      </div>
+
+            </div>
+            <div class="clear"></div>
+            
+
+
+            </div>
+                    </div>
+                </div>
+                <footer>
+                   <ul>
+                       <li><a href="">A Propos</a> |</li>
+                       <li><a href="">CGU</a> |</li>
+                       <li><a href="">Mentions légales</a> |</li>
+                       <li><a href="">Contact</a> </li>
+                   </ul>
+                </footer>
+        </div>
+
+        
+
+</div>
+
+<script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+$('.bxslider').bxSlider({
+  auto: true,
+  autoControls: true
+});
+});
+        </script>   
+</body>
+</html>

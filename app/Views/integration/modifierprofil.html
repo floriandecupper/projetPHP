@@ -8,6 +8,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
 <link rel="stylesheet" media="screen" href="css/style.css">
 <link rel="stylesheet" href="css/mfglabs_iconset.css">
+<link href="css/customFile.css" rel="stylesheet" type="text/css" />
+<link href="css/modifs.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/iThing-min.css">
 </head>
 <body>
 
@@ -71,7 +74,8 @@
                                 <label for="email">Email :</label><input type="mail" name="email">
                                 <label for="oldmdp">Ancien mot de passe :</label><input type="password" name="oldmdp">
                                 <label for="mdp">*Nouveau mot de passe :</label><input type="password" name="mdp">
-                                <label for="photo">Photo de profil :</label><input type="upload" name="photo">
+                                <label for="photo">Photo de profil :</label><input type="file" name="photo">
+                                <input type="submit" value="modifier">
                               </form>
                               </div>
                             </div>
@@ -90,6 +94,7 @@
                               <form action="">
                                 <label for="description">Description</label><textarea name="description" id="" cols="30" rows="10"></textarea>
                                 <label for="">Je sais faire:</label>
+                                <input type="submit" value="modifier">
                               </form>
                               </div>
                             </div>
@@ -104,9 +109,20 @@
                               <div class="rectangle"><h3>Je me déplace</h3></div> 
                               <div class="triangle-l"></div> 
                               <div class="triangle-r"></div> 
+                              
                               <div class="info">
-                              <p>GMAP</p>
+                                <div id="map"></div>
+                              <form method="post" id="geocoding_form">
+            <div class="input">
+              <label for="address">Adresse:</label>
+              <input type="text" id="address" name="address" />
+              <label for="distance">Distance (en km convertis en m pour le radius):</label>
+              <input type="number" id="distance" name="distance"/>
+              <input type="submit" class="btn" value="Rechercher" />
+              <input onclick="clean();" type=button value="Annuler"/>
 
+            </div>
+          </form>
                               </div>
                             </div>
                           </div>
@@ -121,6 +137,7 @@
                               <div class="triangle-l"></div> 
                               <div class="triangle-r"></div> 
                               <div class="info">
+                                <form action="">
                               <label for="">En général je suis disponible le :</label
                               div class="daycontent">
                         <div class="day">
@@ -140,16 +157,26 @@
                            <div class="day">
                         <input type="checkbox" name="dispo_jours" id="samedi" value="6" checked><label for="samedi">SAMEDI</label><br/></div>
                            <div class="day">
-                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/>
-                          </div>
+                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/></div>
+
+                        <div id="slider">
+                          <input type="hidden" id="min" name="min" />
+                          <input type="hidden" id="max" name="max" />
+                          <span id="sliderlabelg">00h</span>
+                          <span id="sliderlabeld">23h</span>
+                        </div>
+                        <input type="submit" value="modifier">
+                        </form>
+                          
                           </div>                              </div>
                             </div>
                           </div>
+                           <div class="clear"></div>
                         </div>
 
-                    <div class="clear"></div>
+                   
                     </div>
-                    </div>
+                    
                     </div>
                 </div>
                 <footer>
@@ -163,5 +190,76 @@
         </div>
 <script src="js/lib/jquery-1.9.1.min.js"></script>
 <script src="js/main.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script src="js/jQRangeSlider-min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="https://raw.github.com/HPNeo/gmaps/master/gmaps.js"></script>
+    <script type="text/javascript">
+    
+    function clean(){
+     cercle.visible=false; //test pourri de toggle de visibilité : cercle variable non reconnue
+    }
+      $(document).ready(function(){
+        map = new GMaps({
+          div: '#map',
+          lat: 48.85186,
+          lng: 2.420284,
+          zoom:12
+        });
+        
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+          GMaps.geocode({
+            address: $('#address').val().trim(),
+            callback: function(results, status)
+            {
+              if(status=='OK')
+              {
+                var latlng = results[0].geometry.location;
+                var center = map.setCenter(latlng.lat(), latlng.lng());
+                map.addMarker({
+                  lat: latlng.lat(),
+                  lng: latlng.lng()
+                });
+                //debut drawcircle
+              var cercle =  map.drawCircle({
+              
+              strokeColor: '#368299',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#368299',
+                fillOpacity: 0.35,
+                center:map.getCenter(),
+                radius: parseInt($('#distance').val())*1000     //recuperation de la distance en km convertie en m                      
+              });//fin drawcircle
+              }
+            }
+          });           
+        });//fin du geocoding form
+    });//fin du document ready fn
+    
+    </script>
+    <script>
+    //<!--
+      $("#slider").rangeSlider({
+        bounds: {min: 0, max: 23},
+        defaultValues:{min: 10, max: 19},
+
+          formatter:function(val){
+        return Math.round(val) + " h";
+      },
+      arrows:false
+    }).bind("valuesChanged", function(e, data){
+      console.log($("#min").val());
+      $("#min").val(Math.round(data.values.min));
+      $("#max").val(Math.round(data.values.max));
+      console.log($("#min").val());
+
+    });
+
+    $('.customup').customFileInput();
+    //-->
+</script>
 </body>
 </html>

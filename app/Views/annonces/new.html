@@ -1,14 +1,78 @@
-<?php require 'app/Views/header.html'; ?>
- 	<form method="post" action="creer-annonce" enctype="multipart/form-data"><br />Pour ajouter une annonce, merci de remplir le formulaire ci-dessous.<br /><br />
- 		<input type="text" placeholder="Titre" name="titre" <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required /><br /><br />
-		<input type="text" placeholder="Indication du montant voulu comme récompense offert" name="prix" <?php if(isset($form_prix)) { echo "value='$form_prix'"; } ?> /><br /><br />
-		<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-		<input type="file" name="photo1" accept='image/*'/>
-		<input type="file" name="photo2" accept='image/*'/>
-		<input type="file" name="photo3" accept='image/*'/>
-		<input type="file" name="photo4" accept='image/*'/>
-<input type="text" placeholder="Tags séparés par une virgule" name="tags" <?php if(isset($form_tags)) { echo "value='$form_tags'"; } ?> /><br /><br />
-		<textarea placeholder="Description" name="description" required ><?php if(isset($form_description)) { echo $form_description; } ?></textarea><br /><br />
-		<input type="submit" value="Ajouter !" />
-	</form>
-<?php require 'app/Views/footer.html'; ?>
+<?php require 'app/Views/header.html'; ?> 
+                   <form class="create" method="post" action="creer-annonce" enctype="multipart/form-data">
+                       <fieldset>
+                       <label for="titre" >* Titre de l'annonce :</label>
+                       <input type="text" name="titre" id="annonce" autofocus <?php if(isset($form_titre)) { echo "value='$form_titre'"; } ?> required >
+                       <label for="categorie" >* Catégorie :</label>
+                       <select name="categorie" id="categorie" required>
+                        <option value="">Sélectionner une catégorie</option>
+                        <?php
+                        foreach($categories as $categorie) {
+                          ?>
+                          <option value="<?php echo $categorie->nom; ?>"><?php echo $categorie->nom; ?></option>
+                          <?php
+                        }
+                        ?>
+                       </select>
+                       <label for="description">* Description :</label>
+                       <textarea  rows="5"  name="description" id="description"  required><?php if(isset($form_description)) { echo $form_description; } ?>
+                       </textarea>
+                       <label for="prix">* Récompense :</label>
+                        <input type="text" name="prix" size="2" id="recompense" placeholder="25" <?php if(isset($form_prix)) { echo "value='$form_prix'"; } ?> required>
+                        <img src="<?php echo $site_url; ?>public/img/credits.png" alt="credits"><div class="clear"></div>
+                        <label for="adresse">* Adresse :</label>
+                        <input type="text" name="adresse" id="adresse" value="17 bis rue du progrès, 93100 Montreuil">
+                         </fieldset>
+                         <fieldset>
+                        <span class="title"> Photos :</span>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file" accept='image/*'  />
+                        </div>
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file" accept='image/*'  />
+                        </div>
+                        <div class="file">
+                          <input name="uploaded" class="customup" type="file" accept='image/*'  />
+                        </div>
+                         </fieldset>
+                         <fieldset>
+                           <label for="tags">Tags :</label><input type="text" placeholder="Tags séparés par une virgule" name="tags" <?php if(isset($form_tags)) { echo "value='$form_tags'"; } ?>/>
+                         </fieldset>
+                         <fieldset>
+                        <span class="title">* Disponibilités :</span>
+                        <div class="daycontent">
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="lundi" value="1" checked>
+                        <label for="lundi">LUNDI</label><br/></div>
+                        <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mardi" value="2"><label for="mardi">MARDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="mercredi" value="3"><label for="mercredi">MERCREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="jeudi" value="4" checked><label for="jeudi">JEUDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="vendredi" value="5"><label for="vendredi">VENDREDI</label><br/>
+                          </div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="samedi" value="6" checked><label for="samedi">SAMEDI</label><br/></div>
+                           <div class="day">
+                        <input type="checkbox" name="dispo_jours" id="dimanche" value="7"><label for="dimanche">DIMANCHE</label><br/>
+                          </div>
+                          </div>
+                          </fieldset>
+                          <fieldset>
+                        <div id="slider">
+                          <input type="hidden" id="min" name="min" />
+                          <input type="hidden" id="max" name="max" />
+                          <span id="sliderlabelg">00h</span>
+                          <span id="sliderlabeld">23h</span>
+                        </div>
+                         </fieldset>
+                         
+                        <input type="submit" value="publier">
+                        </form>
+                        
+           <?php require 'app/Views/footer.html'; ?>

@@ -109,8 +109,8 @@ function beforeroute(){
         }elseif(F3::get('POST.password1')!=F3::get('POST.password2')) 
         {
             $erreur="Erreur : Les deux mots de passe ne correspondent pas.";
-        }else
-        {
+        }elseif(!F3::get('POST.accueil')) 
+        {   
             $dispo_jours='';
             if(is_array(F3::get('POST.dispo_jours'))) {
                 $dispo_jours = implode(",",F3::get('POST.dispo_jours'));
@@ -162,7 +162,9 @@ function beforeroute(){
             F3::reroute('/connexion?info=inscription'); 
         }
         // Effet ricochet :
-        
+        if(!F3::get('POST.accueil')) {
+            F3::set('erreur',$erreur);
+        }
         F3::mset(array(
             'form_mail'=>F3::get('POST.mail'),
             'form_prenom'=>F3::get('POST.prenom'),
@@ -170,8 +172,7 @@ function beforeroute(){
             'form_description'=>F3::get('POST.description'),
             'form_tags'=>F3::get('POST.tags'),
             'form_dispo_jours'=>'',
-            'form_dispo_heures'=>F3::get('POST.dispo_heures'),
-            'erreur'=>$erreur
+            'form_dispo_heures'=>F3::get('POST.dispo_heures')
         ));
         echo Views::instance()->render('signup/home.html');
         

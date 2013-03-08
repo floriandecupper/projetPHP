@@ -27,7 +27,34 @@ Image : <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 						?>
 
 						<br />
-	                          	
-		<input type="submit" value="Je m'inscris !" />
+						<input type="submit" value="Je m'inscris !" />
 	</form>
+	                          	<div class="deplacement">
+                          <div class="box">
+             
+
+                             <div class="bubble"> 
+                              <div class="rectangle"><h3>Je me déplace</h3></div> 
+                              <div class="triangle-l"></div> 
+                              <div class="triangle-r"></div> 
+                              
+                              <div class="info">
+                                
+                              <form method="post" id="geocoding_form">
+                              	<div id="map"></div>
+            <div class="input">
+              <label for="address">Depuis...</label>
+              <input type="text" id="address" name="address" />
+              <label for="distance">Jusqu'à...</label>
+              <input type="number" id="distance" name="distance"/>
+              <input type="submit" class="btn" value="Rechercher" />
+              <input onclick="clean();" type=button value="Annuler"/>
+
+            </div>
+          </form>
+          
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 <?php require 'app/Views/footer.html'; ?>

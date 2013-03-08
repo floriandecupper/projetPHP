@@ -7,7 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" type="image/x-icon" href="img/assets/favicon.ico" />
 <link rel="stylesheet" media="screen" href="css/style.css">
+<link rel="stylesheet" media="screen" href="css/modifs.css">
 <link rel="stylesheet" href="css/mfglabs_iconset.css">
+<link rel="stylesheet" href="css/iThing-min.css">
 </head>
 <body>
 
@@ -64,15 +66,43 @@
                             <li> <h3>Sébastien C.</h3>
                           <i class="icon-message">Le contacter</i>
                           <p>Bonjour à tous ! Je m’appelle Sébastien et je suis développeur web. Je suis également doué en plomberie, et je me débrouille avec une tondeuse à gazon. J’espère pouvoir vous rendre service !</p></li>
-                          <li><img src="" alt="photo profil">
-                            <label for="notes">Note moyenne :</label>
-                            <p>credits</p>  
+                          <li><img src="img/photoprofil.png" alt="photo profil">
+                            <h3>Note moyenne :</h3>
+                            <form action="">
+                              
+                                  <ul class="notes-echelle">
+                                    <li>
+                                      <label for="note01" title="Note : 1 sur 5">1</label>
+                                      <input type="radio" name="notesA" id="note01" value="1" />
+                                    </li>
+                                    <li>
+                                      <label for="note02" title="Note : 2 sur 5">2</label>
+                                      <input type="radio" name="notesA" id="note02" value="2" />
+                                    </li>
+                                    <li>
+                                      <label for="note03" title="Note : 3 sur 5">3</label>
+                                      <input type="radio" name="notesA" id="note03" value="3" />
+                                    </li>
+                                    <li>
+                                      <label for="note04" title="Note : 4 sur 5">4</label>
+                                      <input type="radio" name="notesA" id="note04" value="4" />
+                                    </li>
+                                    <li>
+                                      <label for="note05" title="Note : 5 sur 5">5</label>
+                                      <input type="radio" name="notesA" id="note05" value="5" />
+                                    </li>
+                                  </ul>
+      
+                                  <input type="submit" value="Voter&nbsp;!" />
+                            </form>
+
+                            <h3>Credits :</h3>  
                             <p>140</p><img src="img/credits.png" alt="credits">  
                           </li>
                         </ul>
                          
                         </div>
-                        <div class="compétences">
+                        <div class="competences">
                            <div class="box">
              
 
@@ -95,15 +125,12 @@
                               <div class="rectangle"><h3>Ma zone de déplacement</h3></div> 
                               <div class="triangle-l"></div> 
                               <div class="triangle-r"></div> 
-                              <div class="info">
-                              <p>
-                              Gmap
-                              </p>
-                              </div>
+                              <div id="map"></div>
+                      
                             </div>
                           </div>
                         </div>
-                        <div class="disponibilités">
+                        <div class="disponibilites">
                           <div class="box">
              
 
@@ -140,7 +167,8 @@
                         </div>
                   
                         </div>
-                         <div class="services">
+                        <div class="clear"></div>
+                         <div class="servicesdone">
                            <div class="box">
                              <div class="bubble"> 
                               <div class="rectangle"><h3>Mes services</h3></div> 
@@ -148,42 +176,53 @@
                               <div class="triangle-r"></div> 
                               <div class="info">
                               <ul>
-                                <li> <h5>Réparation de fenêtre</h5>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
                                     <hr/>
+                                    <div class="noterecue"></div>
+                                    <div class="contentservice">
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                          </div>
+                                </li></a>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <div class="contentservice">
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                          </div>
+                                </li></a>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <div class="contentservice">
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                                </li></a>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="noterecue"></div>
+                                    <div class="contentservice">
+                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
+                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
+                          </div>
+                                </li></a>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
+                                    <hr/>
+                                    <div class="contentservice">
                                     <div class="noterecue"></div>
                                     <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
                           <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
-                                <li> <h5>Réparation de fenêtre</h5>
+                          </div>
+                                </li></a>
+                                <a href=""><li> <h5>Réparation de fenêtre</h5>
                                     <hr/>
                                     <div class="noterecue"></div>
+                                    <div class="contentservice">
                                     <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
                           <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
-                                <li> <h5>Réparation de fenêtre</h5>
-                                    <hr/>
-                                    <div class="noterecue"></div>
-                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
-                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
-                                <li> <h5>Réparation de fenêtre</h5>
-                                    <hr/>
-                                    <div class="noterecue"></div>
-                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
-                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
-                                <li> <h5>Réparation de fenêtre</h5>
-                                    <hr/>
-                                    <div class="noterecue"></div>
-                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
-                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
-                                <li> <h5>Réparation de fenêtre</h5>
-                                    <hr/>
-                                    <div class="noterecue"></div>
-                                    <img src="img/holo.png" alt="icons"><p>IL Y A 2 SEMAINES POUR AGATHE L.</p>
-                          <img src="img/comment.png" alt="icons"><p>“Sebastien est très gentil mais ma fenêtre est déjà en train de se décrocher... mais il m’a dit qu’il pourrait repasser pour voir !”</p>
-                                </li>
+                          </div>
+                                </li></a>
                               </ul>
                               </div>
                         </div>
@@ -195,7 +234,7 @@
                     </div>
                     </div>
                     </div>
-                </div>
+                    </div>
                 <footer>
                    <ul>
                        <li><a href="">A Propos</a> |</li>
@@ -206,6 +245,97 @@
                 </footer>
         </div>
 <script src="js/lib/jquery-1.9.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $("ul.notes-echelle").addClass("js");
+  $("ul.notes-echelle li").addClass("note-off");
+  
+  $("ul.notes-echelle input")
+    .focus(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-focus");
+      $(this).parent("li").addClass("note-focus");
+      $(this).parent("li").nextAll("li").addClass("note-off");
+      $(this).parent("li").prevAll("li").removeClass("note-off");
+      $(this).parent("li").removeClass("note-off");
+    })
+    .blur(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-focus");
+      if($(this).parents("ul.notes-echelle").find("li input:checked").length == 0) {
+        $(this).parents("ul.notes-echelle").find("li").addClass("note-off");
+      }
+    })
+    .click(function() {
+      $(this).parents("ul.notes-echelle").find("li").removeClass("note-checked");
+      $(this).parent("li").addClass("note-checked");
+    });
+    
+  $("ul.notes-echelle li").mouseover(function() {
+    $(this).nextAll("li").addClass("note-off");
+    $(this).prevAll("li").removeClass("note-off");
+    $(this).removeClass("note-off");
+  });
+    
+  $("ul.notes-echelle").mouseout(function() {
+    $(this).children("li").addClass("note-off");
+    $(this).find("li input:checked").parent("li").trigger("mouseover");
+  });
+  
+  $("ul.notes-echelle input:checked").parent("li").trigger("mouseover");
+  $("ul.notes-echelle input:checked").trigger("click");
+  
+});
+</script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="https://raw.github.com/HPNeo/gmaps/master/gmaps.js"></script>
+    <script type="text/javascript">
+    
+    function clean(){
+     cercle.visible=false; //test pourri de toggle de visibilité : cercle variable non reconnue
+    }
+      $(document).ready(function(){
+        map = new GMaps({
+          div: '#map',
+          lat: 48.85186,
+          lng: 2.420284,
+          zoom:12
+        });
+
+
+        
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+          GMaps.geocode({
+            address: $('#address').val().trim(),
+            callback: function(results, status)
+            {
+              if(status=='OK')
+              {
+                var latlng = results[0].geometry.location;
+                var center = map.setCenter(latlng.lat(), latlng.lng());
+                map.addMarker({
+                  lat: latlng.lat(),
+                  lng: latlng.lng()
+                });
+                //debut drawcircle
+              var cercle =  map.drawCircle({
+              
+              strokeColor: '#368299',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#368299',
+                fillOpacity: 0.35,
+                center:map.getCenter(),
+                radius: parseInt($('#distance').val())*1000     //recuperation de la distance en km convertie en m                      
+              });//fin drawcircle
+              }
+            }
+          });           
+        });//fin du geocoding form
+    });//fin du document ready fn
+    
+    </script>
 </body>
 </html>

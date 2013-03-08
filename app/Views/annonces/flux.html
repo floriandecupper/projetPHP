@@ -1,0 +1,64 @@
+<?php require 'app/Views/header.html';
+if(!isset($user)) {
+	?>
+		<a href="inscription">S'inscrire</a> - <a href="connexion">Se connecter</a><br /><br />
+	<?php
+}
+?>
+<div class="trie">
+                     <div class="triecontent">
+                          <h6>VOICI LES ANNONCES CORRESPONDANT À VOS COMPÉTENCES</h6>
+                          <p>Ici, vous pouvez parcourir les annonces correspondant à votre profil et ainsi proposer votre aide et vos compétences en échange de crédits. Vous pourrez ensuite ré-utiliser ses crédits afin de “payer” les autres membres pour les services qu’ils vous rendront.
+Vous pouvez trier ses annonces en fonction de différents critères.</p>
+                          <form action="#">
+                            <fieldset>
+                              <h4>Catégories :</h4>
+                              <input type="radio" name="categories" value="all" checked> Voir toutes<br/>
+                              <input type="radio" name="categories" value="categories" > Plomberie<br/>
+                              <input type="radio" name="categories" value="design"> Design
+                              <br/>
+                              <input type="radio" name="categories" value="demenagement"> Déménagement<br/>    
+                            </fieldset>
+                            <fieldset>
+                              <h4>Distance de chez moi :</h4>
+                              <input type="radio" name="distance" value="1" checked> < 1km<br/>
+                              <input type="radio" name="distance" value="5" > 1-5 km<br/>
+                              <input type="radio" name="distance" value="10"> 5-10 km
+                              <br/>
+                              <input type="radio" name="distance" value="0"> Peu importe<br/> 
+                            </fieldset>
+                            <fieldset>
+                              <h4>Dates :</h4>
+                              <input type="date" min="2013-03-01" name="the_date" placeholder="19/03/2013">
+                              <input type="date" min="2013-03-01" name="the_date">
+                             <span> <input type="checkbox" name="nodate" value="nodate"><label for="nodate">Je n'ai pas de date de précise</label></span>
+                              <span><input type="checkbox" name="photos" value="photos"><label for="photos">Photos obligatoires</label></span>
+                            </fieldset>
+
+                            <div class="clear"></div>
+                            <input type="submit" value="filtrer">
+
+                          </form>
+                     </div>
+                   </div>
+                      <div class="annonces">
+                         
+                        <?php
+	foreach ($annonces as $i=>$annonce) {
+		?>
+                           <div class="annonce"><img src="<?php echo $site_url; if(isset($image)) { echo 'upload/'.$image; }else{ echo 'public/img/imgannonce.png'; } ?>" alt="">
+                          <h4><?php echo $annonce->titre; ?></h4>
+                          <img src="<?php echo $site_url; ?>public/img/holo.png" alt="icons"><p>POSTE IL Y A 2 JOURS PAR LAURE.N DANS DESIGN</p>
+                          <img src="<?php echo $site_url; ?>public/img/comment.png" alt="icons"><p><?php echo $annonce->description; ?></p>
+
+                          <a href='annonce/".$annonce->id."'>Voir l'annonce</a>
+                          <a href="">Envoyer un message à l'annonceur</a>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                      </div>
+                    <button type="button">CHARGER PLUS D'ANNONCES</button>
+<?php
+	require 'app/Views/footer.html'; 
+?>

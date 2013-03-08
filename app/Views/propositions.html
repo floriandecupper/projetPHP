@@ -1,11 +1,27 @@
-<?php require 'app/Views/header.html';
+<?php require 'app/Views/header.html';?> 
+<h2><span>Mes propositions</span></h2>
+            <div class="annonces">
 	
+<?php
 	foreach ($propositions as $proposition) 
 	{
-		echo "<h2>".$proposition['atitre']."</h2>Etat (de l'annonce, à changer par celui de la proposition) : ".F3::get('etat'.$proposition['aetat'].'Annonce')."<br /><a href='".$site_url."annonce/".$proposition['id_annonce']."'>Voir l'annonce</a> - ";
-			echo "Prix : ".$proposition['prix']."<br />";
-			echo "Message : ".$proposition['message'];
-		echo "<br /></hr /><br />";
+?>
+ <div class="annonce">
+ 	<img src="<?php echo $site_url; if(isset($image)) { echo 'upload/'.$image; 
+ }else{ echo 'public/img/imgannonce.png'; } ?>" alt="">
+                          <h4><?php echo $proposition['atitre']; ?></h4>
+                          <img src="<?php echo $site_url; ?>public/img/holo.png" alt="icons"><p class="uppercase">PROPOSE <?php echo transformToCountDown($proposition['date']); ?></p>
+                          <img src="<?php echo $site_url; ?>public/img/comment.png" alt="icons"><p><?php echo $proposition['message']; ?></p>
+
+                          <a href='annonce/<?php echo $proposition['id_annonce']; ?>'>Voir l'annonce</a><br />
+                          Etat de l'annonce : <?php echo F3::get('etat'.$proposition['aetat'].'Annonce'); ?><br />
+                          Crédits demandés : <?php echo $proposition['prix']; ?>
+</div>
+		
+		
+	 <?php
 	}
-	require 'app/Views/footer.html'; 
-?> 
+	?>
+
+</div>
+<?php	require 'app/Views/footer.html'; ?> 

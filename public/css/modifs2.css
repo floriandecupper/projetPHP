@@ -1,0 +1,398 @@
+/*hr{display:block;height:1px;border:0;border-top:1px solid #98999c;padding:0; width: 80%;}
+
+.recapitulatif {
+
+    width: 48%;
+    height: 288px;
+    display: inline-block;
+    margin-bottom: 36px;
+    background: #1c1d22 url(../img/ruban.png) no-repeat 5% 0%; 
+    color:#f1f1f1;
+}
+
+.recapitulatif ul  {
+	margin: 25px 0 0 100px;
+	
+}
+.recapitulatif ul li {
+	width: 50%;
+	display: inline-block;
+	float: left;
+	
+}
+
+.recapitulatif ul li:nth-child(1) h3{
+margin-top: 25px;
+
+}
+
+.contentservice{
+	padding: 40px;
+}
+
+.recapitulatif ul li:nth-child(1) p{
+font-size: 1.2em;
+}
+.recapitulatif ul li:nth-child(1) i{
+margin-top: 20px;
+display: inline-block;
+font-size: 1.2em;
+color: #414248;
+
+}
+
+.recapitulatif ul li:nth-child(2){
+text-align: center;
+}
+
+.recapitulatif ul li:nth-child(2) input[type="submit"]{
+font-size: 1.1em;
+line-height: 1.1em;
+width: 50%;
+margin: 10px auto;
+float:none;
+background-color: #1c1d22;
+}
+
+.recapitulatif ul li:nth-child(2) img:nth-child(1){
+display: block;
+width: 101px;
+height: 97px;
+margin: 0 auto;
+margin-bottom: 30px;
+border: 1px solid #dedede;
+}
+
+.recapitulatif ul li:nth-child(2) img:nth-child(2){
+max-width: 8%;
+}
+
+.recapitulatif ul li:nth-child(2) h3{
+font-size: 1.2em;
+}
+.recapitulatif p {
+	color:#f1f1f1;
+	display: inline-block;
+}
+
+.profil .competences{
+	float: right;
+	width: 48%;
+display: inline-block;
+height: 288px;
+margin-bottom: 36px;
+}
+
+.profil .bubble{
+	width: 100%;
+}
+
+.profil .box {
+width: 100%;
+}
+
+.gmap {
+	float: left;
+		width: 48%;
+display: inline-block;
+}
+
+.gmap .bubble {
+height: 400px;
+}
+
+.disponibilites .bubble {
+height: 400px;
+}
+
+.competences .bubble {
+height: 288px;
+}
+
+
+.contentservice p{
+	font-size: 0.9em;
+}
+.infospersos{
+	width: 48%;
+	float: left;
+	display: inline-block;
+	margin-bottom: 36px;
+}
+.annoncerecap{
+float: left;
+width: 48%;
+display: inline-block;
+height: 350px;
+margin-bottom: 36px;
+background-color: #f1f1f1;
+}
+
+.annoncerecap h5{
+margin-top: 20px;
+margin-left: 50px;
+}
+
+.annoncerecap img{
+	float: left;
+	margin-top: 15px;
+}
+
+.annoncerecap .contentservice p{
+	margin-left: 50px;
+} 
+
+.dispoannonce {
+	width: 48%;
+    height: 288px;
+    display: inline-block;
+    background: #f1f1f1;
+}
+.retour {
+	width: 240px;
+	height: 33px;
+	background-color: #1c1d22;
+	margin: 35px 35px;
+}
+.retour a{
+	color: #f1f1f1;
+	margin-left: 25px;
+	line-height: 33px;
+}
+
+.wrapper .blocks h2 span {
+background-color: #dedede;
+}
+
+
+.photos {
+float: right;
+	width: 48%;
+display: inline-block;
+height: 350px;
+margin-bottom: 36px;
+}
+.photos .info {
+	padding :20px 80px;
+}
+.photos a {
+
+display: inline-block;
+position: relative;
+}
+.photos a span{
+	height:100%;
+	width:100%;
+	position:absolute;
+	background: url(../img/photoover.png);
+	display: none;
+	z-index:1;
+}
+
+.photos a:hover span{
+	display:block;
+}
+
+
+
+.adresse{
+	float: right;
+	width: 48%;
+display: inline-block;
+height: 288px;
+
+}
+.competencesmodif{
+	width: 48%;
+	float: right;
+	display: inline-block;
+	margin-bottom: 36px;
+}
+
+.deplacement{
+	width: 48%;
+	float: left;
+	height: 400px;
+	display: inline-block;
+}
+
+
+
+.disposmodif{
+width: 48%;
+	float: right;
+	display: inline-block;
+}
+
+.disponibilites{
+	float:right;
+	width: 48%;
+display: inline-block;
+height: 228px;
+}
+
+.dejamembre .box{
+width: 100%;
+}
+
+.servicesdone {
+	width: 100%;
+	margin-top: 36px;
+}
+.servicesdone ul{
+	margin: 0 auto;
+}
+
+.servicesdone ul li{
+	width: 33%;
+	height: 275px;
+	display: inline-block;
+}
+
+.servicesdone ul li:hover{
+	background-color: #c4d6dc;
+}
+
+.servicesdone ul li img{
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+}
+
+.servicesdone ul li h5{
+text-align: center;
+}
+.devenirmembre {
+	width: 48%;
+float: left;
+display: inline-block;
+}
+.dejamembre{
+	width: 48%;
+display: inline-block;
+float: right;
+}
+/* GMAP */
+
+#map{
+		  height:80%;
+		  width:100%;
+	  }
+/* rubbans */
+
+.box {
+  display: inline-block;
+width: 100%;
+
+}
+.blocks{
+  width:100%;
+  margin: 0 auto;
+}
+.blocks .box:nth-child(2) {
+  float: right;
+}
+.bubble {
+  clear: both;
+margin: 0px auto;
+width: 100%;
+background: #f0f0f1;
+position: relative;
+z-index: 90;
+min-height: 300px;
+}
+
+.rectangle {
+  background: #368298;
+  height: 33px;
+  width: 106%;
+  position: relative;
+  left:-15px;
+  top: 30px;
+  float: left;
+  z-index: 100; /* the stack order: foreground */
+}
+
+.rectangle h3 {
+padding-top: 6px;
+text-align: center;
+}
+
+.triangle-l {
+  border-color: transparent #245a69 transparent transparent;
+  border-style:solid;
+  border-width:15px;
+  height:0px;
+  width:0px;
+  position: relative;
+  left: -30px;
+  top: 48px;
+  z-index: -1; /* displayed under bubble */
+}
+
+.triangle-r {
+  border-color: transparent transparent transparent #245a69;
+  border-style:solid;
+  border-width:10px;
+  height:0px;
+  width:0px;
+  position: relative;
+  left: 100%;
+  top: 18px;
+  z-index: -1; /* displayed under bubble */
+}
+
+/* etoiles */
+
+fieldset {
+	padding:2em;
+}
+ul.notes-echelle {
+	width: 50%;
+	margin:0 auto;
+	font:.75em/1.2 Arial, Helvetica, sans-serif;
+}
+ul.notes-echelle li {
+	float:left;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+ul.notes-echelle li label {
+	display:block;
+	text-align:center;
+	line-height:20px;
+	background:url(../img/etoiles.png) center top no-repeat;
+	cursor:pointer;
+}
+
+
+ul.notes-echelle li.note-off label {
+	background-position:center -60px;
+}
+ul.notes-echelle li.note-checked {
+	font-weight:bold;
+}
+
+
+
+ul.notes-echelle.js li {
+	width: 5px;
+	min-width:20px;
+	min-height:20px;
+}
+ul.notes-echelle.js input {
+	position:absolute;
+	left:-999%;
+}
+ul.notes-echelle.js li.note-focus {
+	outline:1px dotted #000;
+}
+
+
+* html ul.notes-echelle.js li {
+	width:20px;
+	height:20px;
+}
+*/

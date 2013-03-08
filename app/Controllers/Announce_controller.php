@@ -30,12 +30,52 @@ class Announce_controller{
         echo Views::instance()->render('accueil.html');
 
      }
+     function flux() {
+        $App   = new App();
+        //Création tableau
+        $array = array();
+        
+        if (F3::get('SESSION.user_id')) {
+            $tags = explode(',', F3::get('user')->tags);
+            foreach ($tags as $value) {
+                $annonces = $App->search($value, 'pu_annonce');
+                foreach ($annonces as $annonce) {
+                    if (array_key_exists($annonce->id, $array)) {
+                        $array[$annonce->id] = $array[$annonce->id] + 1;
+                    } else {
+                        $array[$annonce->id] = 1;
+                    }
+                    
+                }
+                
+                
+            }
+            $annonces = array();
+            foreach ($array as $key => $nbr) {
+                $annonces[] = $App->get($key, 'pu_annonce');
+            }
+        } else {
+            if(F3::get('PARAMS.idparrain')) {
+
+                if($App->get(F3::get('PARAMS.idparrain'),'pu_membre')!=false) {
+                    F3::set('SESSION.id_parrain',F3::get('PARAMS.idparrain'));
+                }
+            }
+            $annonces = $App->mget('pu_annonce', 'etat=?', array(
+                0
+            ));
+        }
+        //Recherche pour chaque mot clé dans les annonces, à chaque fois trouvé, on teste si cette annonce est déjà stockée, si oui on ajoute le tag dans un tableau multidimensionnel, sinon on ajoute cette annonce au tableau
+        F3::set('annonces', $annonces);
+        echo Views::instance()->render('annonces/flux.html');
+     }
     function ajouter()
     {
 
         F3::set('page_title','Créer une annonce');
         $App=new App();
-        
+        $categories=$App->mget('pu_categorie','id>?',array(0),array());
+        F3::set('categories',$categories);
         $p_ok=array();
         $p_erreurs=array();
         if(F3::get('VERB')=='POST') 
@@ -54,10 +94,6 @@ class Announce_controller{
                     }
                 }
             }
-            echo 'Erreurs :<br />';
-            print_r($p_erreurs);
-            echo '<br />OK : <br />';
-            print_r($p_ok);
             // echo $_FILES["photo1"]["name"];
             if(strlen(F3::get('POST.titre'))<2) 
             {
@@ -68,6 +104,9 @@ class Announce_controller{
             }elseif(!is_numeric(F3::get('POST.prix'))) 
             {
                 $erreur="Erreur : Le prix n'est pas correcte.";
+            }elseif(!F3::get('POST.categorie') || F3::get('POST.categorie')=='') 
+            {
+                $erreur="Erreur : Veuillez sélectionner une catégorie.";
             }else
             {
                 $App=new App();
@@ -79,6 +118,7 @@ class Announce_controller{
                     'id_membre'=>$user->id,
                     'titre'=>F3::get('POST.titre'), 
                     'description'=>F3::get('POST.description'), 
+                    'categorie'=>F3::get('POST.categorie'),
                     'prix'=>F3::get('POST.prix'), 
                     'tags'=>F3::get('POST.tags'),
                     'etat'=>0
@@ -90,9 +130,9 @@ class Announce_controller{
                         'nom'=>$p['name'], 
                         'type'=>'annonce'
                     ),'pu_images');
-                    $extension = explode('.', $p['name']);
-                    $extension = end($extension);
-                    move_uploaded_file($p["tmp_name"],"upload/img" . $picture->id.'.'.$extension);
+
+                    $extension = transformToExtension($p['name']);
+                    move_uploaded_file($p["tmp_name"],"upload/img" . $picture->id.$extension);
                 }
                 F3::reroute('/annonce/'.$annonce->id);
             }
@@ -110,7 +150,6 @@ class Announce_controller{
         }
             else
         {
-            $user=$App->get(F3::get('SESSION.user_id'), 'pu_membre');
             echo Views::instance()->render('annonces/new.html');
         }
     }
@@ -322,6 +361,10 @@ function proposition() {
                     array($annonce->id)
                     ));
             $user0=$App->get($annonce->id_membre, 'pu_membre');
+            $photos=$App->mget('pu_images','id_objet=?',array($annonce->id),array('limit','4'));
+            if($photos!=false) {
+                F3::set('photos',$photos);
+            }
             F3::mset(array(
                 'page_title'=>$annonce->titre,
                 'annonce'=>$annonce,

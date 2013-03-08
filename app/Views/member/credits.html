@@ -1,6 +1,8 @@
-<?php require 'app/Views/header.html'; ?>
-	
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<html>
+<head>
+	</head>
+	<body>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 	Acheter 10 crédits :
 <input type='hidden' value="10" name="amount" />
 <input name="currency_code" type="hidden" value="EUR" />
@@ -16,7 +18,7 @@
 <input name="custom" type="hidden" value="<?php echo F3::get('user')->id; ?>" />
 <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 </form>
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 	Acheter 20 crédits :
 <input type='hidden' value="18" name="amount" />
 <input name="currency_code" type="hidden" value="EUR" />
@@ -32,7 +34,7 @@
 <input name="custom" type="hidden" value="<?php echo F3::get('user')->id; ?>" />
 <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 </form>
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 	Acheter 50 crédits :
 <input type='hidden' value="35" name="amount" />
 <input name="currency_code" type="hidden" value="EUR" />
@@ -48,4 +50,5 @@
 <input name="custom" type="hidden" value="<?php echo F3::get('user')->id; ?>" />
 <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 </form>
-<?php require 'app/Views/footer.html'; ?>
+</body>
+</html>

@@ -19,9 +19,8 @@ class App extends Prefab{
     }else{
       return false;
     }
-  }  
+  }
   function exec($sql) {
-    echo $sql.'<br />';
     $db=F3::get('dB');
     return $db->exec($sql);
     

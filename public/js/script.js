@@ -1,5 +1,50 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
+$("#iframe_credits").fancybox({
+        'width'             : '75%',
+        'height'            : '500px',
+        'autoScale'         : false,
+        'transitionIn'      : 'elastic',
+        'transitionOut'     : 'elastic',
+        'type'              : 'iframe'
+    });
+	$("#iframe_notifications").fancybox({
+        'width'             : '60%',
+        'height'            : '500px',
+        'autoScale'         : false,
+        'transitionIn'      : 'elastic',
+        'transitionOut'     : 'elastic',
+        'type'              : 'iframe'
+    });
+$(".file").customFileInput({
+      'width'   : '118px', //width of button
+    'height'  : '45px',  //height of text
+      'btnText' : '+' //text of the button 
+  });
 
+    //<!--
+    $('.bxslider').bxSlider({
+  auto: true,
+  autoControls: true
+});
+      $("#slider").rangeSlider({
+        bounds: {min: 0, max: 23},
+        defaultValues:{min: 10, max: 19},
+
+          formatter:function(val){
+        return Math.round(val) + " h";
+      },
+      arrows:false
+    }).bind("valuesChanged", function(e, data){
+      console.log($("#min").val());
+      $("#min").val(Math.round(data.values.min));
+      $("#max").val(Math.round(data.values.max));
+      console.log($("#min").val());
+
+    });
+
+    $('.customup').customFileInput();
+    
 	// Facebook DEBUT
 	function checkInscription() {
 			FB.api('/me', function(response){
@@ -60,7 +105,7 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 
 	$('input[name="tags"], input[name="recherche"]').tagsInput({
    autocomplete_url: site_url+'tags',
-   height:'19px',
+   height:'40px',
    interactive:true,
 
    defaultText:'Ajouter un tag',
@@ -125,26 +170,25 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 			});
 		},1000);
 
-		$('.notifications').click(function() {
-			$.ajax(
-			{
-				type: 'POST',
-				url:  site_url+'api',
-				data: 'id='+id_user,
-				success: function(data)
-				{
-					$('.notifications_content').html(data);
-					// $('.messages').css('color','black');
-				}
-			});
+		// $('.notifications').click(function() {
+		// 	$.ajax(
+		// 	{
+		// 		type: 'POST',
+		// 		url:  site_url+'api',
+		// 		data: 'id='+id_user,
+		// 		success: function(data)
+		// 		{
+		// 			$('.notifications_content').html(data);
+		// 			// $('.messages').css('color','black');
+		// 		}
+		// 	});
 			$('.notifications_popup').show().animate({'opacity':'1'});
-		});
 		$('.notifications_popup .croix').click(function() {
 			$('.notifications_popup').animate({'opacity':'0'}, function() {
 				$(this).hide();
 			});
 		});
-	}
+		}
 		// $('.message').next().attr('data-hauteur',$(this).height());
 		$('.message').click(function() {
 			console.log($(this).next().css('height'));
@@ -159,4 +203,41 @@ if(((typeof(id_user) == 'undefined') || (id_fb==0)) && sPath.search('connexion')
 				console.log($(this).next().css('height'));
 			}
 		});
+		var map = new GMaps({
+          div: '#map',
+          lat: 48.85186,
+          lng: 2.420284,
+          zoom:12
+        });
+        
+        
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+          GMaps.geocode({
+            address: $('#address').val().trim(),
+            callback: function(results, status)
+            {
+              if(status=='OK')
+              {
+                var latlng = results[0].geometry.location;
+                var center = map.setCenter(latlng.lat(), latlng.lng());
+                map.addMarker({
+                  lat: latlng.lat(),
+                  lng: latlng.lng()
+                });
+                //debut drawcircle
+              var cercle =  map.drawCircle({
+              
+              strokeColor: '#368299',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#368299',
+                fillOpacity: 0.35,
+                center:map.getCenter(),
+                radius: parseInt($('#distance').val())*1000     //recuperation de la distance en km convertie en m                      
+              });//fin drawcircle
+              }
+            }
+          });           
+        });//fin du geocoding form
 });
