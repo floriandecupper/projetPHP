@@ -30,73 +30,89 @@ class Announce_controller{
         echo Views::instance()->render('accueil.html');
 
      }
-    function ajouter(){
+    function ajouter()
+    {
 
         F3::set('page_title','Créer une annonce');
         $App=new App();
         
-        $pictures=array();
-        for($i=1;$i<=4;$i++) 
-        {
-            if (F3::get('FILES.photo'+$i))
-            {
-                if(F3::get('FILES.photo'+$i+'.error') > 0) 
-                {
-                    $erreur =F3::get('FILES.photo'+$i+'.error');
-                    set('erreur', $erreur);
-                }else{
-                    $pictures[]='test';
-                }
-            }
-        }
+        $p_ok=array();
+        $p_erreurs=array();
         if(F3::get('VERB')=='POST') 
         {
-            print_r(F3::get('FILES'));
+            for($i=1;$i<=4;$i++) 
+            {
+                if (F3::get('FILES.photo'.$i))
+                {
+                    if(F3::get('FILES.photo'.$i.'.error') > 0 || (F3::get('FILES.photo'.$i.'.type') != "image/png" && F3::get('FILES.photo'.$i.'.type') != "image/jpeg"))
+                    {
+                        array_push($p_erreurs, F3::get('FILES.photo'.$i));
+                        $erreur =F3::get('FILES.photo'.$i.'.error');
+                    }else
+                    {
+                        array_push($p_ok, F3::get('FILES.photo'.$i));
+                    }
+                }
+            }
+            echo 'Erreurs :<br />';
+            print_r($p_erreurs);
+            echo '<br />OK : <br />';
+            print_r($p_ok);
             // echo $_FILES["photo1"]["name"];
-        //     if(strlen(F3::get('POST.titre'))<2) 
-        //     {
-        //         $erreur="Erreur : Le titre doit contenir au moins 2 caractères.";
-        //     }elseif(strlen(F3::get('POST.description'))<20) 
-        //     {
-        //         $erreur="Erreur : La description doit contenir au moins 20 caractères.";
-        //     }elseif(!is_numeric(F3::get('POST.prix'))) 
-        //     {
-        //         $erreur="Erreur : Le prix n'est pas correcte.";
-        //     }else
-        //     {
-        //         $App=new App();
-        //         $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
-        //         if(F3::get('POST.tags')!='') {
-        //             $App->tags(F3::get('POST.tags'));
-        //         }
-        //         $annonce=$App->add(array(
-        //             'id_membre'=>$user->id,
-        //             'titre'=>F3::get('POST.titre'), 
-        //             'description'=>F3::get('POST.description'), 
-        //             'prix'=>F3::get('POST.prix'), 
-        //             'tags'=>F3::get('POST.tags'),
-        //             'etat'=>0
-        //         ),'pu_annonce');
+            if(strlen(F3::get('POST.titre'))<2) 
+            {
+                $erreur="Erreur : Le titre doit contenir au moins 2 caractères.";
+            }elseif(strlen(F3::get('POST.description'))<20) 
+            {
+                $erreur="Erreur : La description doit contenir au moins 20 caractères.";
+            }elseif(!is_numeric(F3::get('POST.prix'))) 
+            {
+                $erreur="Erreur : Le prix n'est pas correcte.";
+            }else
+            {
+                $App=new App();
+                $user=$App->get(F3::get('SESSION.user_id'),'pu_membre');
+                if(F3::get('POST.tags')!='') {
+                    $App->tags(F3::get('POST.tags'));
+                }
+                $annonce=$App->add(array(
+                    'id_membre'=>$user->id,
+                    'titre'=>F3::get('POST.titre'), 
+                    'description'=>F3::get('POST.description'), 
+                    'prix'=>F3::get('POST.prix'), 
+                    'tags'=>F3::get('POST.tags'),
+                    'etat'=>0
+                ),'pu_annonce');
+                foreach($p_ok as $p) { 
+                    $picture=$App->add(array(
+                        'id_membre'=>$user->id,
+                        'id_objet'=>$annonce->id,
+                        'nom'=>$p['name'], 
+                        'type'=>'annonce'
+                    ),'pu_images');
+                    $extension = explode('.', $p['name']);
+                    $extension = end($extension);
+                    move_uploaded_file($p["tmp_name"],"upload/img" . $picture->id.'.'.$extension);
+                }
+                F3::reroute('/annonce/'.$annonce->id);
+            }
 
-        //         F3::reroute('/annonce/'.$annonce->id);
-        //     }
+            F3::mset(array(
+                'form_titre'=>F3::get('POST.titre'),
+                'form_prix'=>F3::get('POST.prix'),
+                'form_prix'=>F3::get('POST.tags'),
+                'form_description'=>F3::get('POST.description'),
+                'erreur'=>$erreur
+            ));
 
-        //     F3::mset(array(
-        //         'form_titre'=>F3::get('POST.titre'),
-        //         'form_prix'=>F3::get('POST.prix'),
-        //         'form_prix'=>F3::get('POST.tags'),
-        //         'form_description'=>F3::get('POST.description'),
-        //         'erreur'=>$erreur
-        //     ));
-
-        //     echo Views::instance()->render('annonces/new.html');
+            echo Views::instance()->render('annonces/new.html');
 
         }
-            // else
-        // {
+            else
+        {
             $user=$App->get(F3::get('SESSION.user_id'), 'pu_membre');
             echo Views::instance()->render('annonces/new.html');
-        // }
+        }
     }
     
         function commentaire(){
@@ -281,7 +297,7 @@ function proposition() {
     {
         $App=new App();
 
-        if(F3::get('PARAMS.idannonce')) {  
+        if(F3::get('PARAMS.idannonce')) {
             $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce'); 
             F3::mset(array(
                 'page_title'=>"Propositions reçus pour l'annonce ID".$annonce->id,
@@ -290,25 +306,32 @@ function proposition() {
             ));
             echo Views::instance()->render('annonces/propositions.html');
         }else {
-            $propositions=$App->mget('pu_proposition','id_membre=?',array(F3::get('user')->id));
+             $propositions=$App->exec("SELECT p.id, p.id_annonce, p.message, p.prix, p.lu, p.date, a.etat AS aetat, a.titre AS atitre FROM pu_proposition AS p INNER JOIN pu_annonce AS a ON p.id_annonce = a.id WHERE p.id_membre=".F3::get('user')->id);
+            F3::set('propositions',$propositions);
             echo Views::instance()->render('propositions.html');
         }
-    } 
+    }
     function annonce() 
     {
         $App=new App();
         $annonce=$App->get(F3::get('PARAMS.idannonce'), 'pu_annonce');
-        $nbrePropositions=count($App->mget('pu_proposition','id_annonce=?',array($annonce->id)));
+            if($annonce) {
+            $nbrePropositions=count(
+                $App->mget('pu_proposition',
+                    'id_annonce=?',
+                    array($annonce->id)
+                    ));
+            $user0=$App->get($annonce->id_membre, 'pu_membre');
+            F3::mset(array(
+                'page_title'=>$annonce->titre,
+                'annonce'=>$annonce,
+                'user0'=>$user0,
+                'nbrePropositions'=>$nbrePropositions
+            ));
 
-        $user0=$App->get($annonce->id_membre, 'pu_membre');
-        F3::mset(array(
-            'page_title'=>$annonce->titre,
-            'annonce'=>$annonce,
-            'user0'=>$user0,
-            'nbrePropositions'=>$nbrePropositions
-        ));
 
         echo Views::instance()->render('annonces/show.html');
+    }
     }
     function signaler() 
     {

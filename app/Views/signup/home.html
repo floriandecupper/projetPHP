@@ -1,5 +1,5 @@
 <?php require 'app/Views/header.html'; ?>
- 	<form method="post" action="<?php echo $site_url; ?>inscription"><br />Pour vous inscrire, merci de remplir le formulaire ci-dessous.<br /><br />
+ 	<form method="post" enctype="multipart/form-data" action="<?php echo $site_url; ?>inscription"><br />Pour vous inscrire, merci de remplir le formulaire ci-dessous.<br /><br />
  		<input type="mail" placeholder="Adresse E-mail" name="mail" <?php if(isset($form_mail)) { echo "value='$form_mail'"; } ?> required /><br /><br />
 		<input type="text" placeholder="Prénom" name="prenom" <?php if(isset($form_mail)) { echo "value='$form_prenom'"; } ?> required /><br /><br />
 		<input type="text" placeholder="Nom" name="nom" <?php if(isset($form_nom)) { echo "value='$form_nom'"; } ?> required /><br /><br />
@@ -17,7 +17,8 @@
                         <INPUT TYPE="checkbox" NAME="dispo_jours" VALUE="7">Dimanche<BR>
                         	<!-- Remplacer text par hidden dans type pour les deux lignes ci-dessous -->
                          Horaire (De 8h à 16h : 08,16) <input type="text" id="dispo_heures" name="dispo_heures" placeholder="xx,xx" size="5" /><br /><br />
-
+Image : <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+		<input type="file" name="photo" accept='image/*'/><br />
 	                          	
 						<?php if(isset($id_parrain)) { ?>
 							ID parrain : <input type="text" name="id_parrain" <?php echo 'value="'.$id_parrain.'"'; ?> readonly /><br />

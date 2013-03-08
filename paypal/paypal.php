@@ -43,11 +43,12 @@ require('../app/Models/App.php');
         while (!feof($fp)) {
             $res = fgets ($fp, 1024);
             if (strcmp ($res, "VERIFIED") == 0) {
-            		$contenu = "Paiement OK";
-				    $mail=new Mail("sebastien.carbain@gmail.com", F3::get('site_mail'), '', 'Test', $contenu);
-				    $mail->send();
                     $App=new App();
                     $user=$App->get($data['custom'],'pu_membre');
+            		$contenu = "Bonjour ".transformToPseudo($user->prenom,$user->nom).",<br /><br />Votre paiement a bien été reçu, vos crédits ont bien été ajouté à votre compte.<br /><br />Cordialement,<br />L'équipe de ".F3::get('site_nom');
+				    $mail=new Mail($user->mail, F3::get('site_mail'), '', 'Confirmation de paiement', $contenu);
+				    $mail->send();
+
                     if($data['payment_amount']==10) {
                         $nbreCredits=10;
                     }elseif($data['payment_amount']==18) {

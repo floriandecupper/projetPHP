@@ -82,7 +82,6 @@ function beforeroute(){
   {
     F3::set('page_title','Inscription');
     $App=new App();
-    $id_parrain=0;
     if(F3::get('POST.id_parrain') && $App->get(F3::get('POST.id_parrain'),'pu_membre')!=false) {
         $id_parrain=F3::get('POST.id_parrain');
         F3::set('id_parrain',$id_parrain);
@@ -138,6 +137,24 @@ function beforeroute(){
                 $App->update($parrain);
             }
             $user=$App->add($array,'pu_membre');
+            print_r(F3::get('FILES.photo'));
+            if(F3::get('FILES.photo')) 
+            {   
+                
+                if(F3::get('FILES.photo.error') <= 0 && (F3::get('FILES.photo.type') == "image/png" || F3::get('FILES.photo.type') == "image/jpeg"))
+                {
+                    $erreur =F3::get('FILES.photo.error');
+                    $picture=$App->add(array(
+                        'id_membre'=>$user->id,
+                        'nom'=>F3::get('FILES.photo.name'), 
+                        'type'=>'membre'
+                    ),'pu_images');
+                    $extension = explode('.', F3::get('FILES.photo.name'));
+                    $extension = end($extension);
+
+                    move_uploaded_file(F3::get('FILES.photo.tmp_name'),"upload/img" . $picture->id.'.'.$extension);
+                }
+            }
             $contenu = "<p>Bonjour ".$user->prenom.",<br /><br />Vous venez de vous inscrire sur ".F3::get('site_nom').". Afin de valider votre inscription, vous devez cliquer sur le lien suivant :<br /><a href='".F3::get('site_url')."verification/".$user->id."/".$user->activation."'>".F3::get('site_url')."verification/".$user->id."/".$user->activation."</a><br /><br />Cordialement,<br />L'équipe de ".F3::get('site_nom');
             $mail=new Mail($user->mail, F3::get('site_mail'), '', 'Inscription sur '.F3::get('site_nom'), $contenu);
             $mail->send();
